@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git Workflow Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2128;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --green: #3fb950;
+    --green-dim: #1a3626;
+    --blue: #58a6ff;
+    --blue-dim: #0d1f38;
+    --orange: #f0883e;
+    --orange-dim: #2d1a0a;
+    --yellow: #d29922;
+    --yellow-dim: #2a1f00;
+    --purple: #bc8cff;
+    --purple-dim: #1e1035;
+    --teal: #39d0d8;
+    --accent: #3fb950;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Sora', sans-serif;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(48,54,61,0.25) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(48,54,61,0.25) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 16px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 24px 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--blue), var(--purple));
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-dim);
+    border: 1px solid var(--green);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #e6edf3 0%, #58a6ff 50%, #3fb950 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .header-sub {
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+
+  /* Contact Button */
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    letter-spacing: 0.01em;
+  }
+
+  .contact-btn:hover {
+    background: var(--blue-dim);
+    box-shadow: 0 0 20px rgba(88,166,255,0.2);
+    transform: translateY(-1px);
+  }
+
+  .contact-btn:active { transform: translateY(0); }
+
+  .contact-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* ─── QUICK NAV ─── */
+  .quick-nav {
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s 0.08s ease both;
+  }
+
+  .quick-nav-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding-left: 1px;
+  }
+
+  .nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .nav-row-tag {
+    font-size: 0.67rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    white-space: nowrap;
+    min-width: 52px;
+    padding-right: 4px;
+  }
+
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px 6px 10px;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: background 0.18s, border-color 0.18s, transform 0.15s, color 0.18s;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .nav-pill:hover {
+    background: var(--surface2);
+    transform: translateY(-1px);
+  }
+
+  .nav-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .nav-pill.c-blue   { border-color: rgba(88,166,255,0.25); }
+  .nav-pill.c-blue:hover   { border-color: var(--blue); color: var(--blue); }
+  .nav-pill.c-blue   .dot  { background: var(--blue); }
+
+  .nav-pill.c-orange { border-color: rgba(240,136,62,0.25); }
+  .nav-pill.c-orange:hover { border-color: var(--orange); color: var(--orange); }
+  .nav-pill.c-orange .dot  { background: var(--orange); }
+
+  .nav-pill.c-purple { border-color: rgba(188,140,255,0.25); }
+  .nav-pill.c-purple:hover { border-color: var(--purple); color: var(--purple); }
+  .nav-pill.c-purple .dot  { background: var(--purple); }
+
+  .nav-pill.c-green  { border-color: rgba(63,185,80,0.25); }
+  .nav-pill.c-green:hover  { border-color: var(--green); color: var(--green); }
+  .nav-pill.c-green  .dot  { background: var(--green); }
+
+  .nav-pill.c-teal   { border-color: rgba(57,208,216,0.25); }
+  .nav-pill.c-teal:hover   { border-color: var(--teal); color: var(--teal); }
+  .nav-pill.c-teal   .dot  { background: var(--teal); }
+
+  .nav-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 2px 0;
+  }
+
+  @media (max-width: 600px) {
+    .nav-row-tag { min-width: 40px; font-size: 0.62rem; }
+    .nav-pill { font-size: 0.74rem; padding: 5px 12px 5px 9px; }
+  }
+
+  /* ─── INTRO BOX ─── */
+  .intro-box {
+    background: var(--blue-dim);
+    border: 1px solid rgba(88,166,255,0.3);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .intro-box h3 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+
+  .intro-box p { color: #c9d1d9; font-size: 0.92rem; }
+
+  code {
+    background: rgba(255,255,255,0.08);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 0.83em;
+  }
+
+  /* ─── BRANCH STRUCTURE ─── */
+  .branch-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .branch-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .branch-item {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .branch-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .branch-item.main    { border-top: 3px solid var(--orange); }
+  .branch-item.develop { border-top: 3px solid var(--blue); }
+  .branch-item.feature { border-top: 3px solid var(--purple); }
+
+  .branch-name {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .branch-item.main    .branch-name { color: var(--orange); }
+  .branch-item.develop .branch-name { color: var(--blue); }
+  .branch-item.feature .branch-name { color: var(--purple); }
+  .branch-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* ─── PHASE HEADER ─── */
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 44px 0 22px;
+    flex-wrap: wrap;
+  }
+
+  .phase-badge {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 5px 13px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .phase-badge.phase1 { background: var(--orange-dim); color: var(--orange); border: 1px solid var(--orange); }
+  .phase-badge.phase2 { background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple); }
+
+  .phase-title {
+    font-size: clamp(1.05rem, 3vw, 1.35rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .phase-line { flex: 1; height: 1px; background: var(--border); min-width: 20px; }
+  .phase-note { color: var(--muted); font-size: 0.78rem; white-space: nowrap; }
+
+  /* ─── UC TABS ─── */
+  .uc-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .uc-tabs::-webkit-scrollbar { display: none; }
+
+  .uc-tab {
+    flex: 1;
+    min-width: 56px;
+    text-align: center;
+    padding: 9px 8px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.2s;
+    user-select: none;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+
+  .uc-tab:hover { background: var(--surface2); color: var(--text); }
+  .uc-tab.active { color: var(--text); background: var(--purple-dim); border-color: rgba(188,140,255,0.3); }
+
+  .uc-content { display: none; }
+  .uc-content.active { display: block; }
+
+  /* ─── STEPS ─── */
+  .steps-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s;
+    animation: fadeUp 0.4s ease both;
+  }
+  .step-card:hover { border-color: rgba(88,166,255,0.35); }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: var(--blue-dim);
+    border: 1px solid rgba(88,166,255,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--blue);
+  }
+
+  .step-title {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .step-body { padding: 14px 18px; }
+  .step-desc { color: #c9d1d9; font-size: 0.88rem; margin-bottom: 10px; }
+
+  /* ─── CODE BLOCKS ─── */
+  .code-block {
+    background: #010409;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: #c9d1d9;
+    margin: 8px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    line-height: 1.9;
+    white-space: pre;
+  }
+
+  .code-block .line  { display: block; }
+  .code-block .cmd   { color: var(--green); }
+  .code-block .flag  { color: var(--orange); }
+  .code-block .str   { color: var(--yellow); }
+  .code-block .url   { color: var(--blue); }
+
+  /* ─── CALLOUTS ─── */
+  .callout {
+    display: flex;
+    gap: 10px;
+    border-radius: 8px;
+    padding: 11px 14px;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    align-items: flex-start;
+  }
+
+  .callout.note      { background: var(--yellow-dim); border-left: 3px solid var(--yellow); color: #e3c97a; }
+  .callout.important { background: var(--orange-dim); border-left: 3px solid var(--orange); color: #e5a36a; }
+  .callout.done      { background: var(--green-dim);  border-left: 3px solid var(--green);  color: #7ee88c; }
+  .callout.browser   { background: var(--blue-dim);   border-left: 3px solid var(--blue);   color: #88b8f5; }
+  .callout-icon { flex-shrink: 0; }
+
+  /* ─── GH STEPS ─── */
+  .gh-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    align-items: center;
+  }
+
+  .gh-step {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.78rem;
+    color: var(--text);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .gh-arrow { color: var(--muted); font-size: 0.72rem; }
+
+  /* ─── COMPLETE BANNER ─── */
+  .complete-banner {
+    background: var(--green-dim);
+    border: 1px solid rgba(63,185,80,0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--green);
+    font-size: 0.88rem;
+  }
+
+  /* ─── REPEAT NOTE ─── */
+  .repeat-note {
+    background: var(--purple-dim);
+    border: 1px solid rgba(188,140,255,0.25);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-top: 4px;
+    font-size: 0.9rem;
+    color: #d4b8ff;
+    line-height: 1.7;
+  }
+  .repeat-note strong { color: var(--purple); }
+  .repeat-note ul { margin-top: 10px; padding-left: 20px; }
+  .repeat-note li { margin-bottom: 4px; }
+
+  /* ─── QUICK REF ─── */
+  .ref-section { margin-top: 44px; }
+
+  .ref-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ref-grid {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ref-row {
+    display: grid;
+    grid-template-columns: minmax(190px, 250px) 1fr;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    min-width: 460px;
+  }
+  .ref-row:last-child { border-bottom: none; }
+  .ref-row:hover:not(.head) { background: var(--surface2); }
+  .ref-row.head { background: var(--surface2); }
+
+  .ref-cell { padding: 12px 16px; font-size: 0.86rem; }
+  .ref-cell:first-child {
+    font-family: var(--mono);
+    color: var(--teal);
+    font-size: 0.78rem;
+    border-right: 1px solid var(--border);
+  }
+  .ref-cell:last-child { color: #c9d1d9; }
+  .ref-row.head .ref-cell {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    margin-top: 56px;
+    padding: 40px 32px 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    position: relative;
+    overflow: visible;
+    scroll-margin-top: 20px;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--blue), var(--green));
+    border-radius: 0 0 16px 16px;
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    text-align: center;
+  }
+
+  .footer-name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    background: linear-gradient(135deg, var(--text), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+
+  .footer-role {
+    font-size: 0.85rem;
+    color: var(--blue);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-bottom: 20px;
+  }
+
+  .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--border);
+    margin: 0 auto 20px;
+  }
+
+  .footer-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 24px;
+  }
+
+  .footer-meta-line {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .footer-meta-line strong {
+    color: #c9d1d9;
+    font-weight: 500;
+  }
+
+  .footer-email {
+    display: inline-block;
+    color: var(--blue);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border-bottom: 1px solid rgba(88,166,255,0.3);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .footer-email:hover {
+    color: #88c0ff;
+    border-color: rgba(88,166,255,0.7);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-card:nth-child(1) { animation-delay: 0.04s; }
+  .step-card:nth-child(2) { animation-delay: 0.08s; }
+  .step-card:nth-child(3) { animation-delay: 0.12s; }
+  .step-card:nth-child(4) { animation-delay: 0.16s; }
+  .step-card:nth-child(5) { animation-delay: 0.20s; }
+  .step-card:nth-child(6) { animation-delay: 0.24s; }
+  .step-card:nth-child(7) { animation-delay: 0.28s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .container { padding: 20px 12px 60px; }
+    .header { padding: 28px 16px 24px; margin-bottom: 24px; }
+    .branch-grid { grid-template-columns: 1fr; }
+    .phase-header { gap: 8px; margin: 32px 0 16px; }
+    .phase-line { display: none; }
+    .phase-note { display: none; }
+    .uc-tab { min-width: 52px; font-size: 0.78rem; padding: 8px 6px; }
+    .step-header { padding: 12px 14px; gap: 10px; }
+    .step-body   { padding: 12px 14px; }
+    .step-title  { font-size: 0.86rem; }
+    .code-block  { font-size: 0.75rem; padding: 10px 12px; }
+    .gh-step     { font-size: 0.74rem; padding: 4px 8px; }
+    .ref-section { margin-top: 32px; }
+    .footer      { margin-top: 36px; padding: 20px 14px; }
+    .footer-email { font-size: 0.75rem; padding: 9px 14px; }
+    .footer-tag  { font-size: 0.75rem; padding: 4px 11px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">📘 Student Scholar &mdash; CSE (AI/ML)</div>
+    <h1>Git Workflow Guide</h1>
+    <p class="header-sub">Assignment Submission via GitHub &mdash; Step-by-Step Instructions</p>
+    <button class="contact-btn" onclick="document.getElementById('footer').scrollIntoView({behavior:'smooth', block:'start'})">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      Contact the Author
+    </button>
+  </div>
+
+
+  <!-- QUICK NAV -->
+  <div class="quick-nav">
+    <div class="quick-nav-label">Jump to a section</div>
+    <div class="nav-group">
+
+      <div class="nav-row">
+        <span class="nav-row-tag">Basics</span>
+        <button class="nav-pill c-blue" onclick="goTo('sec-intro')"><span class="dot"></span>What is Git?</button>
+        <button class="nav-pill c-blue" onclick="goTo('sec-branches')"><span class="dot"></span>Branch Structure</button>
+      </div>
+
+      <div class="nav-divider"></div>
+
+      <div class="nav-row">
+        <span class="nav-row-tag">Setup</span>
+        <button class="nav-pill c-orange" onclick="goTo('sec-phase1')"><span class="dot"></span>Phase 1 — Repo Setup</button>
+      </div>
+
+      <div class="nav-row">
+        <span class="nav-row-tag">Workflow</span>
+        <button class="nav-pill c-purple" onclick="goTo('sec-phase2')"><span class="dot"></span>Phase 2 — Use Cases</button>
+        <button class="nav-pill c-green" onclick="goTo('sec-uc1')"><span class="dot"></span>Use Case 1</button>
+        <button class="nav-pill c-green" onclick="goTo('sec-uc2')"><span class="dot"></span>Use Case 2</button>
+        <button class="nav-pill c-green" onclick="goTo('sec-uc3')"><span class="dot"></span>Use Case 3</button>
+      </div>
+
+      <div class="nav-divider"></div>
+
+      <div class="nav-row">
+        <span class="nav-row-tag">Ref</span>
+        <button class="nav-pill c-teal" onclick="goTo('sec-ref')"><span class="dot"></span>Command Reference</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box" id="sec-intro">
+    <h3>🔍 What is Git &amp; GitHub?</h3>
+    <p>Git is a <strong>version control system</strong> that helps you track changes in your code. GitHub is a cloud platform where you can store and share your Git repositories online.<br><br>
+    In this assignment, you will maintain separate branches for each Use Case (UC) and merge them into a <code>develop</code> branch using Pull Requests.</p>
+  </div>
+
+  <!-- BRANCH STRUCTURE -->
+  <div class="branch-section" id="sec-branches">
+    <div class="section-label">🌿 Branch Structure Overview</div>
+    <div class="branch-grid">
+      <div class="branch-item main">
+        <div class="branch-name">main</div>
+        <div class="branch-desc">The production branch. Stable, final code only.</div>
+      </div>
+      <div class="branch-item develop">
+        <div class="branch-name">develop</div>
+        <div class="branch-desc">The integration branch. All use cases merge here.</div>
+      </div>
+      <div class="branch-item feature">
+        <div class="branch-name">feature/uc1, uc2…</div>
+        <div class="branch-desc">Individual use case branches. One per use case.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-header" id="sec-phase1">
+    <span class="phase-badge phase1">⚙️ Phase 1</span>
+    <span class="phase-title">Initial Repository Setup</span>
+    <div class="phase-line"></div>
+    <span class="phase-note">Do this ONCE</span>
+  </div>
+
+  <div class="steps-list">
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">1</div><div class="step-title">Create a Repository on GitHub</div></div>
+      <div class="step-body">
+        <div class="gh-steps">
+          <span class="gh-step">Go to github.com</span><span class="gh-arrow">→</span>
+          <span class="gh-step">Click '+' icon</span><span class="gh-arrow">→</span>
+          <span class="gh-step">New repository</span><span class="gh-arrow">→</span>
+          <span class="gh-step">Name it</span><span class="gh-arrow">→</span>
+          <span class="gh-step">Keep Public</span><span class="gh-arrow">→</span>
+          <span class="gh-step">NO README</span><span class="gh-arrow">→</span>
+          <span class="gh-step">Create repository</span>
+        </div>
+        <div class="callout important"><span class="callout-icon">📋</span><span>Copy the repository URL shown on the next page — you'll need it in Step 5.</span></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">2</div><div class="step-title">Create a local folder &amp; open Terminal</div></div>
+      <div class="step-body">
+        <p class="step-desc">Create a new folder on your computer. Open Terminal (Mac/Linux) or Git Bash (Windows) and navigate to it:</p>
+        <div class="code-block"><span class="line"><span class="cmd">cd</span> path/to/your/folder</span></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">3</div><div class="step-title">Initialize Git in your local folder</div></div>
+      <div class="step-body">
+        <div class="code-block"><span class="line"><span class="cmd">git init</span></span></div>
+        <div class="callout note"><span class="callout-icon">💡</span><span>This creates a hidden <code>.git</code> folder — this is how Git tracks your files.</span></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">4</div><div class="step-title">Stage &amp; Commit initial files</div></div>
+      <div class="step-body">
+        <p class="step-desc">Even if the folder is empty, do an initial commit:</p>
+        <div class="code-block"><span class="line"><span class="cmd">git add</span> .</span>
+<span class="line"><span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"initial message"</span></span></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">5</div><div class="step-title">Link your local folder to GitHub</div></div>
+      <div class="step-body">
+        <div class="code-block"><span class="line"><span class="cmd">git remote add</span> origin <span class="url">https://github.com/your-username/your-repo.git</span></span></div>
+        <div class="callout note"><span class="callout-icon">💡</span><span>Replace the URL above with your actual GitHub repository URL.</span></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">6</div><div class="step-title">Create &amp; push the main branch</div></div>
+      <div class="step-body">
+        <div class="code-block"><span class="line"><span class="cmd">git checkout</span> <span class="flag">-b</span> main</span>
+<span class="line"><span class="cmd">git push</span> origin main</span></div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header"><div class="step-num">7</div><div class="step-title">Create &amp; push the develop branch</div></div>
+      <div class="step-body">
+        <div class="code-block"><span class="line"><span class="cmd">git checkout</span> <span class="flag">-b</span> develop</span>
+<span class="line"><span class="cmd">git push</span> origin develop</span></div>
+        <div class="complete-banner">✅ Setup Complete — You now have <code>main</code> and <code>develop</code> on GitHub!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-header" id="sec-phase2" style="margin-top:52px">
+    <span class="phase-badge phase2">📌 Phase 2</span>
+    <span class="phase-title">Use Case Development</span>
+    <div class="phase-line"></div>
+  </div>
+
+  <!-- TABS -->
+  <div id="sec-uc1"></div>
+  <div id="sec-uc2"></div>
+  <div id="sec-uc3"></div>
+  <div class="uc-tabs">
+    <div class="uc-tab active"  onclick="switchTab('uc1')">UC1</div>
+    <div class="uc-tab"         onclick="switchTab('uc2')">UC2</div>
+    <div class="uc-tab"         onclick="switchTab('uc3')">UC3</div>
+    <div class="uc-tab"         onclick="switchTab('ucN')">UC4 / UC5…</div>
+  </div>
+
+  <!-- UC1 -->
+  <div class="uc-content active" id="uc1">
+    <div class="steps-list">
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">1</div><div class="step-title">Create feature branch for UC1</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git checkout</span> <span class="flag">-b</span> feature/uc1</span></div>
+          <div class="callout note"><span class="callout-icon">💡</span><span>Creates <code>feature/uc1</code> from <code>develop</code> and switches to it.</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">2</div><div class="step-title">Write your code for Use Case 1</div></div>
+        <div class="step-body"><p class="step-desc">Write all your code files for UC1. <strong>Do NOT commit yet.</strong></p></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">3</div><div class="step-title">Stage all your changes</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git add</span> .</span></div>
+          <div class="callout note"><span class="callout-icon">💡</span><span>The dot <code>.</code> means "add all changed files". Make sure you're in the project folder.</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">4</div><div class="step-title">Commit with a message</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"uc1 completed"</span></span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">5</div><div class="step-title">Push the branch to GitHub</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git push</span> origin feature/uc1</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">6</div><div class="step-title">Create a Pull Request on GitHub</div></div>
+        <div class="step-body">
+          <div class="callout browser"><span class="callout-icon">🌐</span><span>In your browser:</span></div>
+          <div class="gh-steps">
+            <span class="gh-step">Open repo</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Compare &amp; pull request</span><span class="gh-arrow">→</span>
+            <span class="gh-step">base: develop</span><span class="gh-arrow">→</span>
+            <span class="gh-step">compare: feature/uc1</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Create PR</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Merge &amp; Confirm</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">7</div><div class="step-title">Switch back to develop &amp; pull latest</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git checkout</span> develop</span>
+<span class="line"><span class="cmd">git pull</span> origin develop</span></div>
+          <div class="complete-banner">✅ UC1 is complete and merged into develop!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UC2 -->
+  <div class="uc-content" id="uc2">
+    <div class="steps-list">
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">1</div><div class="step-title">Create feature branch for UC2</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git checkout</span> <span class="flag">-b</span> feature/uc2</span></div>
+          <div class="callout note"><span class="callout-icon">💡</span><span>Creates <code>feature/uc2</code> from <code>develop</code> and switches to it.</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">2</div><div class="step-title">Write your code for Use Case 2</div></div>
+        <div class="step-body"><p class="step-desc">Write all your code files for UC2. <strong>Do NOT commit yet.</strong></p></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">3</div><div class="step-title">Stage all your changes</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git add</span> .</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">4</div><div class="step-title">Commit with a message</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"uc2 completed"</span></span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">5</div><div class="step-title">Push the branch to GitHub</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git push</span> origin feature/uc2</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">6</div><div class="step-title">Create a Pull Request on GitHub</div></div>
+        <div class="step-body">
+          <div class="callout browser"><span class="callout-icon">🌐</span><span>In your browser:</span></div>
+          <div class="gh-steps">
+            <span class="gh-step">Open repo</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Compare &amp; pull request</span><span class="gh-arrow">→</span>
+            <span class="gh-step">base: develop</span><span class="gh-arrow">→</span>
+            <span class="gh-step">compare: feature/uc2</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Merge &amp; Confirm</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">7</div><div class="step-title">Switch back to develop &amp; pull latest</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git checkout</span> develop</span>
+<span class="line"><span class="cmd">git pull</span> origin develop</span></div>
+          <div class="complete-banner">✅ UC2 is complete and merged into develop!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UC3 -->
+  <div class="uc-content" id="uc3">
+    <div class="steps-list">
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">1</div><div class="step-title">Create feature branch for UC3</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git checkout</span> <span class="flag">-b</span> feature/uc3</span></div>
+          <div class="callout note"><span class="callout-icon">💡</span><span>Creates <code>feature/uc3</code> from <code>develop</code> and switches to it.</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">2</div><div class="step-title">Write your code for Use Case 3</div></div>
+        <div class="step-body"><p class="step-desc">Write all your code files for UC3. <strong>Do NOT commit yet.</strong></p></div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">3</div><div class="step-title">Stage all your changes</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git add</span> .</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">4</div><div class="step-title">Commit with a message</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"uc3 completed"</span></span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">5</div><div class="step-title">Push the branch to GitHub</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git push</span> origin feature/uc3</span></div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">6</div><div class="step-title">Create a Pull Request on GitHub</div></div>
+        <div class="step-body">
+          <div class="callout browser"><span class="callout-icon">🌐</span><span>In your browser:</span></div>
+          <div class="gh-steps">
+            <span class="gh-step">Open repo</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Compare &amp; pull request</span><span class="gh-arrow">→</span>
+            <span class="gh-step">base: develop</span><span class="gh-arrow">→</span>
+            <span class="gh-step">compare: feature/uc3</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Merge &amp; Confirm</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-header"><div class="step-num">7</div><div class="step-title">Switch back to develop &amp; pull latest</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">git checkout</span> develop</span>
+<span class="line"><span class="cmd">git pull</span> origin develop</span></div>
+          <div class="complete-banner">✅ UC3 is complete and merged into develop!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional UCs -->
+  <div class="uc-content" id="ucN">
+    <div class="repeat-note">
+      <strong>🔁 For UC4, UC5, and beyond:</strong><br><br>
+      Follow the exact same 7-step pattern. Each use case gets:
+      <ul>
+        <li>Its own <code>feature/ucN</code> branch</li>
+        <li>Its own commit message <code>"ucN completed"</code></li>
+        <li>Its own Pull Request merging into <code>develop</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div class="ref-section" id="sec-ref">
+    <div class="ref-title">📚 Quick Command Reference</div>
+    <div class="ref-grid">
+      <div class="ref-row head">
+        <div class="ref-cell">Command</div>
+        <div class="ref-cell">What it does</div>
+      </div>
+      <div class="ref-row"><div class="ref-cell">git init</div><div class="ref-cell">Initializes a new Git repository in current folder</div></div>
+      <div class="ref-row"><div class="ref-cell">git add .</div><div class="ref-cell">Stages all changed files for the next commit</div></div>
+      <div class="ref-row"><div class="ref-cell">git commit -m "message"</div><div class="ref-cell">Saves a snapshot of your staged files with a message</div></div>
+      <div class="ref-row"><div class="ref-cell">git remote add origin &lt;url&gt;</div><div class="ref-cell">Links your local repo to GitHub</div></div>
+      <div class="ref-row"><div class="ref-cell">git checkout -b &lt;branch&gt;</div><div class="ref-cell">Creates a new branch and switches to it</div></div>
+      <div class="ref-row"><div class="ref-cell">git push origin &lt;branch&gt;</div><div class="ref-cell">Uploads a branch to GitHub</div></div>
+      <div class="ref-row"><div class="ref-cell">git checkout &lt;branch&gt;</div><div class="ref-cell">Switches to an existing branch</div></div>
+      <div class="ref-row"><div class="ref-cell">git pull origin &lt;branch&gt;</div><div class="ref-cell">Downloads and merges latest changes from GitHub</div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer" id="footer">
+    <div class="footer-inner">
+      <div class="footer-name">Veera Raghavan</div>
+      <div class="footer-role">Student Scholar</div>
+      <div class="footer-divider"></div>
+      <div class="footer-meta">
+        <div class="footer-meta-line"><strong>Computer Science and Engineering</strong> &mdash; Artificial Intelligence &amp; Machine Learning</div>
+        <div class="footer-meta-line">1st Year &nbsp;·&nbsp; SRM Institute of Science and Technology, Kattankulathur</div>
+      </div>
+      <a href="https://mail.google.com/mail/?view=cm&to=veera@veeraraghavanofficial.com" target="_blank" class="footer-email"><span class="__cf_email__" data-cfemail="bdcbd8d8cfdcfdcbd8d8cfdccfdcdad5dccbdcd3d2dbdbd4ded4dcd193ded2d0">[email&#160;protected]</span></a>
+    </div>
+  </div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function switchTab(id) {
+    const ids = ['uc1','uc2','uc3','ucN'];
+    document.querySelectorAll('.uc-tab').forEach((t, i) => {
+      t.classList.toggle('active', ids[i] === id);
+    });
+    document.querySelectorAll('.uc-content').forEach(c => {
+      c.classList.toggle('active', c.id === id);
+    });
+  }
+
+  function goTo(id) {
+    if (id === 'sec-uc1') { switchTab('uc1'); id = 'sec-phase2'; }
+    else if (id === 'sec-uc2') { switchTab('uc2'); id = 'sec-phase2'; }
+    else if (id === 'sec-uc3') { switchTab('uc3'); id = 'sec-phase2'; }
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+
+<!-- Vercel Web Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+
+</body>
+</html>
