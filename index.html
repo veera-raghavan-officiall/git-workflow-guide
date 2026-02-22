@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Git Workflow Guide - Veera Raghavan</title>
+<title>Git Workflow Guide — Veera Raghavan</title>
 <meta name="description" content="Step-by-step Git and GitHub workflow guide for assignment submission. Covers repo setup, branch structure, use case workflows, and Pull Requests.">
 <meta property="og:title" content="Git Workflow Guide">
 <meta property="og:description" content="Step-by-step GitHub assignment submission guide for students. Phase 1: Repo Setup · Phase 2: Use Case workflows with Pull Requests.">
@@ -35,6 +35,8 @@
     --purple: #bc8cff;
     --purple-dim: #1e1035;
     --teal: #39d0d8;
+    --rose: #f778ba;
+    --rose-dim: #2d0f1e;
     --accent: #3fb950;
     --mono: 'JetBrains Mono', monospace;
     --sans: 'Sora', sans-serif;
@@ -234,6 +236,10 @@
   .nav-pill.c-teal   { border-color: rgba(57,208,216,0.25); }
   .nav-pill.c-teal:hover   { border-color: var(--teal); color: var(--teal); }
   .nav-pill.c-teal   .dot  { background: var(--teal); }
+
+  .nav-pill.c-rose   { border-color: rgba(247,120,186,0.25); }
+  .nav-pill.c-rose:hover   { border-color: var(--rose); color: var(--rose); }
+  .nav-pill.c-rose   .dot  { background: var(--rose); }
 
   .nav-divider { width: 100%; height: 1px; background: var(--border); margin: 2px 0; }
 
@@ -604,6 +610,246 @@
     transform: translateX(-50%) translateY(0);
   }
 
+
+  /* ─── WEEKLY ASSIGNMENT ─── */
+  .week-phase-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 52px 0 22px;
+    flex-wrap: wrap;
+  }
+
+  .phase-badge.weekly {
+    background: var(--rose-dim);
+    color: var(--rose);
+    border: 1px solid var(--rose);
+  }
+
+  /* One-time setup box */
+  .setup-once {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .setup-once-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.18s;
+  }
+
+  .setup-once-header:hover { background: #22272e; }
+
+  .setup-once-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--rose);
+  }
+
+  .setup-once-badge {
+    background: var(--rose-dim);
+    color: var(--rose);
+    border: 1px solid var(--rose);
+    border-radius: 99px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .setup-once-chevron {
+    color: var(--muted);
+    transition: transform 0.25s;
+    font-size: 0.9rem;
+  }
+
+  .setup-once-chevron.open { transform: rotate(180deg); }
+
+  .setup-once-body {
+    display: none;
+    padding: 18px 20px;
+  }
+
+  .setup-once-body.open { display: block; }
+
+  /* Week tabs */
+  .week-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .week-tabs::-webkit-scrollbar { display: none; }
+
+  .week-tab {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    padding: 9px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.2s;
+    user-select: none;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+
+  .week-tab:hover { background: var(--surface2); color: var(--text); }
+  .week-tab.active { color: var(--text); background: var(--rose-dim); border-color: rgba(247,120,186,0.3); }
+
+  .week-content { display: none; }
+  .week-content.active { display: block; }
+
+  /* Level tabs inside each week */
+  .level-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 16px;
+  }
+
+  .level-tab {
+    padding: 6px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: all 0.18s;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .level-tab:hover { background: var(--surface2); color: var(--text); }
+  .level-tab.active.lvl1 { background: #1a2f1a; border-color: var(--green); color: var(--green); }
+  .level-tab.active.lvl2 { background: var(--yellow-dim); border-color: var(--yellow); color: var(--yellow); }
+  .level-tab.active.lvl3 { background: var(--rose-dim); border-color: var(--rose); color: var(--rose); }
+
+  .level-content { display: none; }
+  .level-content.active { display: block; }
+
+  /* Assignment brief */
+  .assign-brief {
+    background: var(--rose-dim);
+    border: 1px solid rgba(247,120,186,0.2);
+    border-left: 3px solid var(--rose);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    font-size: 0.86rem;
+    color: #f9b8da;
+    line-height: 1.6;
+  }
+
+  .assign-brief strong { color: var(--rose); }
+
+  /* Level header badge */
+  .level-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .level-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .level-badge.lvl1 { background: #1a2f1a; border: 1px solid var(--green); color: var(--green); }
+  .level-badge.lvl2 { background: var(--yellow-dim); border: 1px solid var(--yellow); color: var(--yellow); }
+  .level-badge.lvl3 { background: var(--rose-dim); border: 1px solid var(--rose); color: var(--rose); }
+
+  .level-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* Problem cards */
+  .problem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .problem-card:hover { border-color: rgba(247,120,186,0.3); }
+
+  .problem-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .problem-icon {
+    width: 28px; height: 28px; min-width: 28px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700; font-family: var(--mono);
+  }
+
+  .problem-icon.lvl1 { background: #1a2f1a; color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .problem-icon.lvl2 { background: var(--yellow-dim); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); }
+  .problem-icon.lvl3 { background: var(--rose-dim); color: var(--rose); border: 1px solid rgba(247,120,186,0.3); }
+
+  .problem-filename {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .problem-body { padding: 14px 16px; }
+  .problem-desc { font-size: 0.84rem; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+
+  /* Submit step */
+  .submit-step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-top: 20px;
+  }
+
+  .submit-step-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--rose);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   /* ─── QUICK REF ─── */
   .ref-section { margin-top: 44px; }
 
@@ -788,6 +1034,13 @@
         <button class="nav-pill c-green" onclick="goTo('sec-uc2')"><span class="dot"></span>Use Case 2</button>
         <button class="nav-pill c-green" onclick="goTo('sec-uc3')"><span class="dot"></span>Use Case 3</button>
         <button class="nav-pill c-green" onclick="goTo('sec-uc4')"><span class="dot"></span>Use Case 4</button>
+      </div>
+
+      <div class="nav-divider"></div>
+
+      <div class="nav-row">
+        <span class="nav-row-tag">Assign</span>
+        <button class="nav-pill c-rose" onclick="goTo('sec-weekly')"><span class="dot"></span>Week 1 &amp; 2</button>
       </div>
 
       <div class="nav-divider"></div>
@@ -1454,6 +1707,839 @@ public class OOPSBannerApp {
     </div>
   </div>
 
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- WEEKLY ASSIGNMENTS                                  -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="week-phase-header" id="sec-weekly">
+    <span class="phase-badge weekly">📋 Weekly</span>
+    <span class="phase-title">Practice Problem Assignments</span>
+    <div class="phase-line"></div>
+    <span class="phase-note">Separate repo · Submit via Google Classroom</span>
+  </div>
+
+  <!-- ONE-TIME SETUP -->
+  <div class="setup-once">
+    <div class="setup-once-header" onclick="toggleSetup()">
+      <div class="setup-once-title">
+        <span>🗂️ practice-problems Repo — One-Time Setup</span>
+        <span class="setup-once-badge">Do This Once</span>
+      </div>
+      <span class="setup-once-chevron open" id="setup-chevron">▼</span>
+    </div>
+    <div class="setup-once-body open" id="setup-body">
+      <p class="step-desc" style="margin-bottom:14px">Create a <strong>separate</strong> GitHub repository called <code>practice-problems</code>. This is independent from your OOPS assignment repo. Do this only once — you'll reuse it every week.</p>
+
+      <div class="step-card" style="margin-bottom:10px">
+        <div class="step-header"><div class="step-num">1</div><div class="step-title">Create the repo on GitHub</div></div>
+        <div class="step-body">
+          <div class="gh-steps">
+            <span class="gh-step">github.com</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Click '+'</span><span class="gh-arrow">→</span>
+            <span class="gh-step">New repository</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Name: <code>practice-problems</code></span><span class="gh-arrow">→</span>
+            <span class="gh-step">Public</span><span class="gh-arrow">→</span>
+            <span class="gh-step">NO README</span><span class="gh-arrow">→</span>
+            <span class="gh-step">Create</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" style="margin-bottom:10px">
+        <div class="step-header"><div class="step-num">2</div><div class="step-title">Create local folder &amp; initialize Git</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">mkdir</span> practice-problems</span>
+<span class="line"><span class="cmd">cd</span> practice-problems</span>
+<span class="line"><span class="cmd">git init</span></span></div>
+        </div>
+      </div>
+
+      <div class="step-card" style="margin-bottom:10px">
+        <div class="step-header"><div class="step-num">3</div><div class="step-title">Create Level folders &amp; link to GitHub</div></div>
+        <div class="step-body">
+          <div class="code-block"><span class="line"><span class="cmd">mkdir</span> Level-1 Level-2 Level-3</span>
+<span class="line"><span class="cmd">git remote add</span> origin <span class="url">https://github.com/your-username/practice-problems.git</span></span></div>
+          <div class="callout note"><span class="callout-icon">💡</span><span>Replace the URL with your actual <code>practice-problems</code> repo URL from Step 1.</span></div>
+        </div>
+      </div>
+
+      <div class="complete-banner" style="margin-top:4px">✅ Repo setup complete — you're ready for every weekly assignment!</div>
+      <p style="margin-top:14px; font-size:0.78rem; color:var(--muted); text-align:center;">
+        ☝️ Done reading? Click the header above to collapse this section.
+      </p>
+    </div>
+  </div>
+
+  <!-- WEEK TABS -->
+  <div class="week-tabs">
+    <div class="week-tab active" onclick="switchWeek('week1')">Week 1 &amp; 2</div>
+    <div class="week-tab" onclick="switchWeek('week2')">Week 3 &amp; 4 <span style="font-size:0.68rem;opacity:0.5">— soon</span></div>
+  </div>
+
+  <!-- WEEK 1 & 2 -->
+  <div class="week-content active" id="week1">
+
+    <div class="assign-brief">
+      <strong>📌 Assignment:</strong> 01 Week 1 and 2 Practice Problems &nbsp;·&nbsp;
+      <strong>Concepts:</strong> Java Comments, Data Types, Variables, Arithmetic Operators, Operator Precedence, Type Conversion, User Input &nbsp;·&nbsp;
+      <strong>Due:</strong> 11:59 PM
+    </div>
+
+    <!-- Level tabs -->
+    <div class="level-tabs">
+      <div class="level-tab active lvl1" onclick="switchLevel('week1','w1l1',this)">Level 1</div>
+      <div class="level-tab lvl2"        onclick="switchLevel('week1','w1l2',this)">Level 2</div>
+      <div class="level-tab lvl3"        onclick="switchLevel('week1','w1l3',this)">Level 3</div>
+    </div>
+
+    <div class="level-content active" id="w1l1">
+      <div class="level-header">
+        <span class="level-badge lvl1">Level 1 — Solve Minimum 3–4 Problems</span>
+        <div class="level-line"></div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl1">☕</div>
+          <div class="problem-filename">EarthVolume.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl1earthvolume')" id="eye-w1lvl1earthvolume">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl1earthvolume')" id="copy-w1lvl1earthvolume">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Calculate the volume of Earth in cubic kilometers and cubic miles using the sphere volume formula.</p>
+          <div class="code-viewer" id="cv-w1lvl1earthvolume" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl1earthvolume">
+              <pre><span class="cv-kw">class</span> <span class="cv-cls">EarthVolume</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        <span class="cv-kw">double</span> radiusKm = <span class="cv-str">6378</span>;
+        <span class="cv-kw">double</span> volumeKm3 = (<span class="cv-str">4.0</span>/<span class="cv-str">3.0</span>) * Math.PI * Math.<span class="cv-fn">pow</span>(radiusKm, <span class="cv-str">3</span>);
+        <span class="cv-kw">double</span> radiusMiles = radiusKm / <span class="cv-str">1.6</span>;
+        <span class="cv-kw">double</span> volumeMiles3 = (<span class="cv-str">4.0</span>/<span class="cv-str">3.0</span>) * Math.PI * Math.<span class="cv-fn">pow</span>(radiusMiles, <span class="cv-str">3</span>);
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The volume of earth in cubic kilometers is "</span> + volumeKm3 + <span class="cv-str">" and cubic miles is "</span> + volumeMiles3);
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl1earthvolume = `class EarthVolume {
+    public static void main(String[] args) {
+        double radiusKm = 6378;
+        double volumeKm3 = (4.0/3.0) * Math.PI * Math.pow(radiusKm, 3);
+        double radiusMiles = radiusKm / 1.6;
+        double volumeMiles3 = (4.0/3.0) * Math.PI * Math.pow(radiusMiles, 3);
+        System.out.println("The volume of earth in cubic kilometers is " + volumeKm3 + " and cubic miles is " + volumeMiles3);
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl1">☕</div>
+          <div class="problem-filename">HarrysAge.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl1harrysage')" id="eye-w1lvl1harrysage">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl1harrysage')" id="copy-w1lvl1harrysage">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Calculate Harry's age in the current year using integer subtraction.</p>
+          <div class="code-viewer" id="cv-w1lvl1harrysage" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl1harrysage">
+              <pre><span class="cv-kw">class</span> <span class="cv-cls">HarrysAge</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        <span class="cv-kw">int</span> birthYear = <span class="cv-str">2000</span>;
+        <span class="cv-kw">int</span> currentYear = <span class="cv-str">2024</span>;
+        <span class="cv-kw">int</span> age = currentYear - birthYear;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Harry's age in "</span> + currentYear + <span class="cv-str">" is "</span> + age);
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl1harrysage = `class HarrysAge {
+    public static void main(String[] args) {
+        int birthYear = 2000;
+        int currentYear = 2024;
+        int age = currentYear - birthYear;
+        System.out.println("Harry's age in " + currentYear + " is " + age);
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl1">☕</div>
+          <div class="problem-filename">KmToMiles.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl1kmtomiles')" id="eye-w1lvl1kmtomiles">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl1kmtomiles')" id="copy-w1lvl1kmtomiles">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Convert a fixed distance from kilometers to miles using a conversion factor.</p>
+          <div class="code-viewer" id="cv-w1lvl1kmtomiles" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl1kmtomiles">
+              <pre><span class="cv-kw">class</span> <span class="cv-cls">KmToMiles</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        <span class="cv-kw">double</span> km = <span class="cv-str">10.8</span>;
+        <span class="cv-kw">double</span> miles = km / <span class="cv-str">1.6</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The distance "</span> + km + <span class="cv-str">" km in miles is "</span> + miles);
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl1kmtomiles = `class KmToMiles {
+    public static void main(String[] args) {
+        double km = 10.8;
+        double miles = km / 1.6;
+        System.out.println("The distance " + km + " km in miles is " + miles);
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl1">☕</div>
+          <div class="problem-filename">PCMAverage.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl1pcmaverage')" id="eye-w1lvl1pcmaverage">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl1pcmaverage')" id="copy-w1lvl1pcmaverage">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Calculate Sam's average mark in Physics, Chemistry and Mathematics.</p>
+          <div class="code-viewer" id="cv-w1lvl1pcmaverage" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl1pcmaverage">
+              <pre><span class="cv-kw">class</span> <span class="cv-cls">PCMAverage</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        <span class="cv-kw">int</span> maths = <span class="cv-str">94</span>, physics = <span class="cv-str">95</span>, chemistry = <span class="cv-str">96</span>;
+        <span class="cv-kw">double</span> average = (maths + physics + chemistry) / <span class="cv-str">3.0</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Sam's average mark in PCM is "</span> + average);
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl1pcmaverage = `class PCMAverage {
+    public static void main(String[] args) {
+        int maths = 94, physics = 95, chemistry = 96;
+        double average = (maths + physics + chemistry) / 3.0;
+        System.out.println("Sam's average mark in PCM is " + average);
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl1">☕</div>
+          <div class="problem-filename">ProfitLoss.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl1profitloss')" id="eye-w1lvl1profitloss">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl1profitloss')" id="copy-w1lvl1profitloss">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Calculate profit and profit percentage from a given cost price and selling price.</p>
+          <div class="code-viewer" id="cv-w1lvl1profitloss" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl1profitloss">
+              <pre><span class="cv-kw">class</span> <span class="cv-cls">ProfitLoss</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        <span class="cv-kw">double</span> costPrice = <span class="cv-str">129</span>, sellingPrice = <span class="cv-str">191</span>;
+        <span class="cv-kw">double</span> profit = sellingPrice - costPrice;
+        <span class="cv-kw">double</span> profitPercentage = (profit / costPrice) * <span class="cv-str">100</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The Cost Price is INR "</span> + costPrice + <span class="cv-str">" and Selling Price is INR "</span> + sellingPrice +
+                           <span class="cv-str">"\nThe Profit is INR "</span> + profit + <span class="cv-str">" and the Profit Percentage is "</span> + profitPercentage);
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl1profitloss = `class ProfitLoss {
+    public static void main(String[] args) {
+        double costPrice = 129, sellingPrice = 191;
+        double profit = sellingPrice - costPrice;
+        double profitPercentage = (profit / costPrice) * 100;
+        System.out.println("The Cost Price is INR " + costPrice + " and Selling Price is INR " + sellingPrice +
+                           "\\nThe Profit is INR " + profit + " and the Profit Percentage is " + profitPercentage);
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="level-content " id="w1l2">
+      <div class="level-header">
+        <span class="level-badge lvl2">Level 2 — Solve Minimum 2–3 Problems</span>
+        <div class="level-line"></div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl2">☕</div>
+          <div class="problem-filename">BasicCalculator.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl2basiccalculator')" id="eye-w1lvl2basiccalculator">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl2basiccalculator')" id="copy-w1lvl2basiccalculator">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Take two numbers as user input and display their addition, subtraction, multiplication and division.</p>
+          <div class="code-viewer" id="cv-w1lvl2basiccalculator" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl2basiccalculator">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">BasicCalculator</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter first number: "</span>);
+        <span class="cv-kw">double</span> number1 = input.<span class="cv-fn">nextDouble</span>();
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter second number: "</span>);
+        <span class="cv-kw">double</span> number2 = input.<span class="cv-fn">nextDouble</span>();
+
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Addition: "</span> + (number1 + number2));
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Subtraction: "</span> + (number1 - number2));
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Multiplication: "</span> + (number1 * number2));
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Division: "</span> + (number1 / number2));
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl2basiccalculator = `import java.util.Scanner;
+class BasicCalculator {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        double number1 = input.nextDouble();
+        System.out.print("Enter second number: ");
+        double number2 = input.nextDouble();
+
+        System.out.println("Addition: " + (number1 + number2));
+        System.out.println("Subtraction: " + (number1 - number2));
+        System.out.println("Multiplication: " + (number1 * number2));
+        System.out.println("Division: " + (number1 / number2));
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl2">☕</div>
+          <div class="problem-filename">DistanceConverter.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl2distanceconverter')" id="eye-w1lvl2distanceconverter">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl2distanceconverter')" id="copy-w1lvl2distanceconverter">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept distance in feet from user and convert it to yards and miles.</p>
+          <div class="code-viewer" id="cv-w1lvl2distanceconverter" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl2distanceconverter">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">DistanceConverter</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter distance in feet: "</span>);
+        <span class="cv-kw">double</span> distanceInFeet = input.<span class="cv-fn">nextDouble</span>();
+        <span class="cv-kw">double</span> yards = distanceInFeet / <span class="cv-str">3</span>;
+        <span class="cv-kw">double</span> miles = yards / <span class="cv-str">1760</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The distance in yards is "</span> + yards + <span class="cv-str">" while in miles is "</span> + miles);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl2distanceconverter = `import java.util.Scanner;
+class DistanceConverter {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter distance in feet: ");
+        double distanceInFeet = input.nextDouble();
+        double yards = distanceInFeet / 3;
+        double miles = yards / 1760;
+        System.out.println("The distance in yards is " + yards + " while in miles is " + miles);
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl2">☕</div>
+          <div class="problem-filename">SquareSide.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl2squareside')" id="eye-w1lvl2squareside">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl2squareside')" id="copy-w1lvl2squareside">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept the perimeter of a square from user and calculate the side length.</p>
+          <div class="code-viewer" id="cv-w1lvl2squareside" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl2squareside">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">SquareSide</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter perimeter of the square: "</span>);
+        <span class="cv-kw">double</span> perimeter = input.<span class="cv-fn">nextDouble</span>();
+        <span class="cv-kw">double</span> side = perimeter / <span class="cv-str">4</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The length of the side is "</span> + side + <span class="cv-str">" whose perimeter is "</span> + perimeter);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl2squareside = `import java.util.Scanner;
+class SquareSide {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter perimeter of the square: ");
+        double perimeter = input.nextDouble();
+        double side = perimeter / 4;
+        System.out.println("The length of the side is " + side + " whose perimeter is " + perimeter);
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl2">☕</div>
+          <div class="problem-filename">TotalPrice.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl2totalprice')" id="eye-w1lvl2totalprice">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl2totalprice')" id="copy-w1lvl2totalprice">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept unit price and quantity from user and calculate the total purchase price.</p>
+          <div class="code-viewer" id="cv-w1lvl2totalprice" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl2totalprice">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">TotalPrice</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter unit price: "</span>);
+        <span class="cv-kw">double</span> unitPrice = input.<span class="cv-fn">nextDouble</span>();
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter quantity: "</span>);
+        <span class="cv-kw">int</span> quantity = input.<span class="cv-fn">nextInt</span>();
+        <span class="cv-kw">double</span> totalPrice = unitPrice * quantity;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The total purchase price is INR "</span> + totalPrice + <span class="cv-str">" if the quantity "</span> + quantity + <span class="cv-str">" and unit price is INR "</span> + unitPrice);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl2totalprice = `import java.util.Scanner;
+class TotalPrice {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter unit price: ");
+        double unitPrice = input.nextDouble();
+        System.out.print("Enter quantity: ");
+        int quantity = input.nextInt();
+        double totalPrice = unitPrice * quantity;
+        System.out.println("The total purchase price is INR " + totalPrice + " if the quantity " + quantity + " and unit price is INR " + unitPrice);
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="level-content " id="w1l3">
+      <div class="level-header">
+        <span class="level-badge lvl3">Level 3 — Solve Minimum 1–2 Problems</span>
+        <div class="level-line"></div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">AreaOfTriangle.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl3areaoftriangle')" id="eye-w1lvl3areaoftriangle">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl3areaoftriangle')" id="copy-w1lvl3areaoftriangle">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept base and height from user and calculate the area of a triangle.</p>
+          <div class="code-viewer" id="cv-w1lvl3areaoftriangle" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl3areaoftriangle">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">AreaOfTriangle</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter base: "</span>);
+        <span class="cv-kw">double</span> base = input.<span class="cv-fn">nextDouble</span>();
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter height: "</span>);
+        <span class="cv-kw">double</span> height = input.<span class="cv-fn">nextDouble</span>();
+        <span class="cv-kw">double</span> area = <span class="cv-str">0.5</span> * base * height;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The area of the triangle is "</span> + area + <span class="cv-str">" square units"</span>);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl3areaoftriangle = `import java.util.Scanner;
+class AreaOfTriangle {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter base: ");
+        double base = input.nextDouble();
+        System.out.print("Enter height: ");
+        double height = input.nextDouble();
+        double area = 0.5 * base * height;
+        System.out.println("The area of the triangle is " + area + " square units");
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">CelsiusToFahrenheit.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl3celsiustofahrenheit')" id="eye-w1lvl3celsiustofahrenheit">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl3celsiustofahrenheit')" id="copy-w1lvl3celsiustofahrenheit">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept temperature in Celsius from user and convert it to Fahrenheit.</p>
+          <div class="code-viewer" id="cv-w1lvl3celsiustofahrenheit" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl3celsiustofahrenheit">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">CelsiusToFahrenheit</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter temperature in Celsius: "</span>);
+        <span class="cv-kw">double</span> celsius = input.<span class="cv-fn">nextDouble</span>();
+        <span class="cv-kw">double</span> fahrenheit = (celsius * <span class="cv-str">9</span> / <span class="cv-str">5</span>) + <span class="cv-str">32</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The "</span> + celsius + <span class="cv-str">" celsius is "</span> + fahrenheit + <span class="cv-str">" fahrenheit"</span>);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl3celsiustofahrenheit = `import java.util.Scanner;
+class CelsiusToFahrenheit {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter temperature in Celsius: ");
+        double celsius = input.nextDouble();
+        double fahrenheit = (celsius * 9 / 5) + 32;
+        System.out.println("The " + celsius + " celsius is " + fahrenheit + " fahrenheit");
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">FahrenheitToCelsius.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl3fahrenheittocelsius')" id="eye-w1lvl3fahrenheittocelsius">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl3fahrenheittocelsius')" id="copy-w1lvl3fahrenheittocelsius">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept temperature in Fahrenheit from user and convert it to Celsius.</p>
+          <div class="code-viewer" id="cv-w1lvl3fahrenheittocelsius" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl3fahrenheittocelsius">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">FahrenheitToCelsius</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter temperature in Fahrenheit: "</span>);
+        <span class="cv-kw">double</span> fahrenheit = input.<span class="cv-fn">nextDouble</span>();
+        <span class="cv-kw">double</span> celsius = (fahrenheit - <span class="cv-str">32</span>) * <span class="cv-str">5</span> / <span class="cv-str">9</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The "</span> + fahrenheit + <span class="cv-str">" fahrenheit is "</span> + celsius + <span class="cv-str">" celsius"</span>);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl3fahrenheittocelsius = `import java.util.Scanner;
+class FahrenheitToCelsius {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter temperature in Fahrenheit: ");
+        double fahrenheit = input.nextDouble();
+        double celsius = (fahrenheit - 32) * 5 / 9;
+        System.out.println("The " + fahrenheit + " fahrenheit is " + celsius + " celsius");
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">Handshakes.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl3handshakes')" id="eye-w1lvl3handshakes">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl3handshakes')" id="copy-w1lvl3handshakes">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept the number of students and calculate the maximum number of unique handshakes.</p>
+          <div class="code-viewer" id="cv-w1lvl3handshakes" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl3handshakes">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">Handshakes</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter number of students: "</span>);
+        <span class="cv-kw">int</span> n = input.<span class="cv-fn">nextInt</span>();
+        <span class="cv-kw">int</span> handshakes = (n * (n - <span class="cv-str">1</span>)) / <span class="cv-str">2</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Maximum number of handshakes: "</span> + handshakes);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl3handshakes = `import java.util.Scanner;
+class Handshakes {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter number of students: ");
+        int n = input.nextInt();
+        int handshakes = (n * (n - 1)) / 2;
+        System.out.println("Maximum number of handshakes: " + handshakes);
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">SimpleInterest.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w1lvl3simpleinterest')" id="eye-w1lvl3simpleinterest">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              View Code
+            </button>
+            <button class="cv-btn" onclick="copyCode('w1lvl3simpleinterest')" id="copy-w1lvl3simpleinterest">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept principal, rate, and time from user and calculate simple interest.</p>
+          <div class="code-viewer" id="cv-w1lvl3simpleinterest" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w1lvl3simpleinterest">
+              <pre><span class="cv-kw">import</span> java.util.Scanner;
+<span class="cv-kw">class</span> <span class="cv-cls">SimpleInterest</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter Principal: "</span>);
+        <span class="cv-kw">double</span> principal = input.<span class="cv-fn">nextDouble</span>();
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter Rate: "</span>);
+        <span class="cv-kw">double</span> rate = input.<span class="cv-fn">nextDouble</span>();
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter Time (years): "</span>);
+        <span class="cv-kw">double</span> time = input.<span class="cv-fn">nextDouble</span>();
+        <span class="cv-kw">double</span> si = (principal * rate * time) / <span class="cv-str">100</span>;
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The Simple Interest is "</span> + si + <span class="cv-str">" for Principal "</span> + principal + <span class="cv-str">", Rate "</span> + rate + <span class="cv-str">" and Time "</span> + time);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre>
+            </div>
+          </div>
+          <script>
+            (function() {
+              window._code_w1lvl3simpleinterest = `import java.util.Scanner;
+class SimpleInterest {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter Principal: ");
+        double principal = input.nextDouble();
+        System.out.print("Enter Rate: ");
+        double rate = input.nextDouble();
+        System.out.print("Enter Time (years): ");
+        double time = input.nextDouble();
+        double si = (principal * rate * time) / 100;
+        System.out.println("The Simple Interest is " + si + " for Principal " + principal + ", Rate " + rate + " and Time " + time);
+        input.close();
+    }
+}`;
+            })();
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMIT STEPS -->
+    <div class="submit-step">
+      <div class="submit-step-title">🚀 Push &amp; Submit to Google Classroom</div>
+      <div class="steps-list">
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">1</div><div class="step-title">Add your .java files into the Level folders</div></div>
+          <div class="step-body">
+            <p class="step-desc">Copy or create your Java files inside <code>Level-1/</code>, <code>Level-2/</code>, <code>Level-3/</code> in the <code>practice-problems</code> folder.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">2</div><div class="step-title">Stage, commit &amp; push to GitHub</div></div>
+          <div class="step-body">
+            <div class="code-block"><span class="line"><span class="cmd">cd</span> practice-problems</span>
+<span class="line"><span class="cmd">git add</span> .</span>
+<span class="line"><span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"Glt: Lvl-1, Lvl-2, Lvl-3 commit"</span></span>
+<span class="line"><span class="cmd">git push</span> origin main</span></div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">3</div><div class="step-title">Copy repo link &amp; Turn in on Google Classroom</div></div>
+          <div class="step-body">
+            <div class="gh-steps">
+              <span class="gh-step">Open <code>practice-problems</code> on GitHub</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Copy the repo URL from address bar</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Go to Google Classroom</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Open the assignment</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Paste link &amp; Turn In</span>
+            </div>
+            <div class="complete-banner" style="margin-top:12px">✅ Assignment submitted!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WEEK 2 placeholder -->
+  <div class="week-content" id="week2">
+    <div class="repeat-note">
+      <strong>🔜 Week 3 &amp; 4 problems will appear here once assigned.</strong><br><br>
+      Follow the same workflow — add your new Java files into the Level folders of your <code>practice-problems</code> repo, commit, push, and submit the link on Google Classroom.
+    </div>
+  </div>
+
   <!-- QUICK REFERENCE -->
   <div class="ref-section" id="sec-ref">
     <div class="ref-title">📚 Quick Command Reference</div>
@@ -1516,6 +2602,33 @@ public class OOPSBannerApp {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  function switchWeek(id) {
+    document.querySelectorAll('.week-tab').forEach((t, i) => {
+      t.classList.toggle('active', ['week1','week2'][i] === id);
+    });
+    document.querySelectorAll('.week-content').forEach(c => {
+      c.classList.toggle('active', c.id === id);
+    });
+  }
+
+  function switchLevel(weekId, showId, clickedEl) {
+    // toggle level contents
+    const week = document.getElementById(weekId);
+    week.querySelectorAll('.level-content').forEach(c => c.classList.remove('active'));
+    const show = document.getElementById(showId);
+    if (show) show.classList.add('active');
+    // toggle level tab active state
+    week.querySelectorAll('.level-tab').forEach(t => t.classList.remove('active'));
+    if (clickedEl) clickedEl.classList.add('active');
+  }
+
+  function toggleSetup() {
+    const body = document.getElementById('setup-body');
+    const chev = document.getElementById('setup-chevron');
+    const open = body.classList.toggle('open');
+    chev.classList.toggle('open', open);
+  }
+
   function toggleCode(id) {
     const body = document.getElementById('body-' + id);
     const btn  = document.getElementById('eye-' + id);
@@ -1570,7 +2683,3 @@ public class OOPSBannerApp {
 
 </body>
 </html>
-
-
-
-
