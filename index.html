@@ -393,6 +393,7 @@
         <span class="nav-row-tag">Assign</span>
         <button class="nav-pill c-rose" onclick="goTo('sec-weekly')"><span class="dot"></span>Week 1 &amp; 2</button>
         <button class="nav-pill c-rose" onclick="goTo('sec-weekly');switchWeek('week2')"><span class="dot"></span>Week 3 &amp; 4</button>
+        <button class="nav-pill c-rose" onclick="goTo('sec-weekly');switchWeek('week3')"><span class="dot"></span>Week 5 &amp; 6</button>
       </div>
       <div class="nav-divider"></div>
       <div class="nav-row">
@@ -2579,6 +2580,7 @@ public class HelloApp {
   <div class="week-tabs">
     <div class="week-tab active" onclick="switchWeek('week1')">Week 1 &amp; 2</div>
     <div class="week-tab"        onclick="switchWeek('week2')">Week 3 &amp; 4</div>
+    <div class="week-tab"        onclick="switchWeek('week3')">Week 5 &amp; 6</div>
   </div>
 
   <div class="week-content active" id="week1">
@@ -3145,13 +3147,13 @@ class SimpleInterest {
   </div>
 
   <div class="week-content" id="week2">
-  <div class="assign-brief"><strong><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Assignment:</strong> 02 Week 3 &amp; 4 Practice Problems &nbsp;·&nbsp; <strong>Concepts:</strong> Conditional Statements (if/else), Loops (for/while), Boolean Logic</div>
+  <div class="assign-brief"><strong><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Assignment:</strong> 02 Week 3 &amp; 4 Practice Problems &nbsp;·&nbsp; <strong>Concepts:</strong> Conditional Statements (if/else), Loops (for/while), Boolean Logic &nbsp;·&nbsp; <strong>Due:</strong> 11:59 PM</div>
   <div class="level-tabs" id="ltabs-w2">
-    <div class="level-tab active lvl1" onclick="switchLevel('w2','w2l1',this)">Level 1</div>
-    <div class="level-tab lvl2"        onclick="switchLevel('w2','w2l2',this)">Level 2</div>
-    <div class="level-tab lvl3"        onclick="switchLevel('w2','w2l3',this)">Level 3</div>
+    <div class="level-tab active lvl1" onclick="switchLevel('w2','w2lvl1',this)">Level 1</div>
+    <div class="level-tab lvl2"        onclick="switchLevel('w2','w2lvl2',this)">Level 2</div>
+    <div class="level-tab lvl3"        onclick="switchLevel('w2','w2lvl3',this)">Level 3</div>
   </div>
-    <div class="level-content active" id="w2l1">
+    <div class="level-content active" id="w2lvl1">
       <div class="level-header">
         <span class="level-badge lvl1">Level 1 — Solve Minimum 3–4 Problems</span>
         <div class="level-line"></div>
@@ -3387,7 +3389,7 @@ public class VotingEligibility {
         </div>
       </div>
     </div>
-    <div class="level-content " id="w2l2">
+    <div class="level-content " id="w2lvl2">
       <div class="level-header">
         <span class="level-badge lvl2">Level 2 — Solve Minimum 2–3 Problems</span>
         <div class="level-line"></div>
@@ -3655,7 +3657,7 @@ public class OddEvenPrinter {
         </div>
       </div>
     </div>
-    <div class="level-content " id="w2l3">
+    <div class="level-content " id="w2lvl3">
       <div class="level-header">
         <span class="level-badge lvl3">Level 3 — Solve Minimum 1–2 Problems</span>
         <div class="level-line"></div>
@@ -3970,21 +3972,1096 @@ public class PrimeChecker {
     <div class="submit-step">
       <div class="submit-step-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Push &amp; Submit to Google Classroom</div>
       <div class="steps-list">
-              <div class="step-card">
-        <div class="step-header"><div class="step-num">1</div><div class="step-title">Add your .java files into the Level folders</div></div>
-        <div class="step-body"><p class="step-desc">Copy or save your solved Java files inside <code>Level-1/</code>, <code>Level-2/</code>, <code>Level-3/</code> in your local <code>practice-problems</code> folder.</p></div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">1</div><div class="step-title">Add your .java files into the Level folders</div></div>
+          <div class="step-body"><p class="step-desc">Copy your solved Java files into <code>Level-1/</code>, <code>Level-2/</code>, <code>Level-3/</code> in your local <code>practice-problems</code> folder.</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">2</div><div class="step-title">Stage, commit &amp; push to GitHub</div></div>
+          <div class="step-body">
+            <div class="code-block"><span class="line"><span class="cmd">cd</span> practice-problems</span>
+<span class="line"><span class="cmd">git add</span> .</span>
+<span class="line"><span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"Glt: Lvl-1, Lvl-2, Lvl-3 commit"</span></span>
+<span class="line"><span class="cmd">git push</span> origin main</span></div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">3</div><div class="step-title">Copy repo link &amp; Turn in on Google Classroom</div></div>
+          <div class="step-body">
+            <div class="gh-steps">
+              <span class="gh-step">Open <code>practice-problems</code> on GitHub</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Copy the repo URL</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Go to Google Classroom</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Open the assignment</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Paste link &amp; Turn In</span>
+            </div>
+            <div class="complete-banner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Assignment submitted!</div>
+          </div>
+        </div>
       </div>
-              <div class="step-card">
-        <div class="step-header"><div class="step-num">2</div><div class="step-title">Stage, commit &amp; push to GitHub</div></div>
-        <div class="step-body"><div class="code-block"><span class="line"><span class="cmd">cd</span> practice-problems
-</span><span class="line"><span class="cmd">git add</span> .
-</span><span class="line"><span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"Glt: Lvl-1, Lvl-2, Lvl-3 commit"</span>
-</span><span class="line"><span class="cmd">git push</span> origin main</span></div></div>
+    </div>
+  </div>
+
+  <div class="week-content" id="week3">
+  <div class="assign-brief"><strong><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Assignment:</strong> 03 Week 5 &amp; 6 Practice Problems &nbsp;·&nbsp; <strong>Concepts:</strong> Java Arrays, Create/Access/Modify Arrays, length property, Multi-dimensional &amp; 2D Arrays, System.err() &amp; exit() &nbsp;·&nbsp; <strong>Due:</strong> 11:59 PM</div>
+  <div class="level-tabs" id="ltabs-w3">
+    <div class="level-tab active lvl1" onclick="switchLevel('w3','w3lvl1',this)">Level 1</div>
+    <div class="level-tab lvl2"        onclick="switchLevel('w3','w3lvl2',this)">Level 2</div>
+    <div class="level-tab lvl3"        onclick="switchLevel('w3','w3lvl3',this)">Level 3</div>
+  </div>
+    <div class="level-content active" id="w3lvl1">
+      <div class="level-header">
+        <span class="level-badge lvl1">Level 1 — Solve Minimum 3–4 Problems</span>
+        <div class="level-line"></div>
       </div>
-              <div class="step-card">
-        <div class="step-header"><div class="step-num">3</div><div class="step-title">Copy repo link &amp; Turn in on Google Classroom</div></div>
-        <div class="step-body"><div class="gh-steps"><span class="gh-step">Open <code>practice-problems</code> on GitHub</span><span class="gh-arrow">→</span><span class="gh-step">Copy the repo URL from address bar</span><span class="gh-arrow">→</span><span class="gh-step">Go to Google Classroom</span><span class="gh-arrow">→</span><span class="gh-step">Open the assignment</span><span class="gh-arrow">→</span><span class="gh-step">Paste link &amp; Turn In</span></div><div class="complete-banner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Assignment submitted!</div></div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">FizzBuzzArray.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl1fizzbuzzarray')" id="eye-w3lvl1fizzbuzzarray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl1fizzbuzzarray')" id="copy-w3lvl1fizzbuzzarray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Store FizzBuzz results (1 to N) in a String array and print each position with its label.</p>
+          <div class="code-viewer" id="cv-w3lvl1fizzbuzzarray" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl1fizzbuzzarray"><pre><span class="cv-cm">/**
+ * FizzBuzzArray.java - Implements FizzBuzz logic using an array for storage.
+ * @author Veera Raghavan
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">FizzBuzzArray</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter a positive integer: "</span>);
+        <span class="cv-kw">int</span> number = input.<span class="cv-fn">nextInt</span>();
+
+        <span class="cv-kw">if</span> (number <= <span class="cv-str">0</span>) {
+            System.err.<span class="cv-fn">println</span>(<span class="cv-str">"Please enter a positive integer."</span>);
+            System.<span class="cv-fn">exit</span>(<span class="cv-str">0</span>);
+        }
+
+        String[] results = <span class="cv-kw">new</span> String[number + <span class="cv-str">1</span>];
+
+        <span class="cv-cm">// Logic loop to save results</span>
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i <= number; i++) {
+            <span class="cv-kw">if</span> (i == <span class="cv-str">0</span>) {
+                results[i] = <span class="cv-str">"0"</span>;
+            } <span class="cv-kw">else if</span> (i % <span class="cv-str">3</span> == <span class="cv-str">0</span> && i % <span class="cv-str">5</span> == <span class="cv-str">0</span>) {
+                results[i] = <span class="cv-str">"FizzBuzz"</span>;
+            } <span class="cv-kw">else if</span> (i % <span class="cv-str">3</span> == <span class="cv-str">0</span>) {
+                results[i] = <span class="cv-str">"Fizz"</span>;
+            } <span class="cv-kw">else if</span> (i % <span class="cv-str">5</span> == <span class="cv-str">0</span>) {
+                results[i] = <span class="cv-str">"Buzz"</span>;
+            } <span class="cv-kw">else</span> {
+                results[i] = String.<span class="cv-fn">valueOf</span>(i);
+            }
+        }
+
+        <span class="cv-cm">// Output loop</span>
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i <= number; i++) {
+            System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Position "</span> + i + <span class="cv-str">" = "</span> + results[i]);
+        }
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl1fizzbuzzarray=`/**
+ * FizzBuzzArray.java - Implements FizzBuzz logic using an array for storage.
+ * @author Veera Raghavan
+ */
+import java.util.Scanner;
+
+public class FizzBuzzArray {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a positive integer: ");
+        int number = input.nextInt();
+
+        if (number <= 0) {
+            System.err.println("Please enter a positive integer.");
+            System.exit(0);
+        }
+
+        String[] results = new String[number + 1];
+
+        // Logic loop to save results
+        for (int i = 0; i <= number; i++) {
+            if (i == 0) {
+                results[i] = "0";
+            } else if (i % 3 == 0 && i % 5 == 0) {
+                results[i] = "FizzBuzz";
+            } else if (i % 3 == 0) {
+                results[i] = "Fizz";
+            } else if (i % 5 == 0) {
+                results[i] = "Buzz";
+            } else {
+                results[i] = String.valueOf(i);
+            }
+        }
+
+        // Output loop
+        for (int i = 0; i <= number; i++) {
+            System.out.println("Position " + i + " = " + results[i]);
+        }
+        input.close();
+    }
+}`;})();</script>
+        </div>
       </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">MeanHeight.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl1meanheight')" id="eye-w3lvl1meanheight"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl1meanheight')" id="copy-w3lvl1meanheight"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept heights of 11 players into an array and calculate the team's mean height.</p>
+          <div class="code-viewer" id="cv-w3lvl1meanheight" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl1meanheight"><pre><span class="cv-cm">/**
+ * MeanHeight.java - Calculates the mean height of 11 players.
+ * @author Veera Raghavan
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">MeanHeight</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        <span class="cv-kw">double</span>[] heights = <span class="cv-kw">new double</span>[<span class="cv-str">11</span>];
+        <span class="cv-kw">double</span> sum = <span class="cv-str">0.0</span>;
+
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < heights.length; i++) {
+            System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter height for player "</span> + (i + <span class="cv-str">1</span>) + <span class="cv-str">": "</span>);
+            heights[i] = input.<span class="cv-fn">nextDouble</span>();
+            sum += heights[i];
+        }
+
+        <span class="cv-kw">double</span> mean = sum / heights.length;
+        System.out.<span class="cv-fn">printf</span>(<span class="cv-str">"The mean height of the team is: %.2f\n"</span>, mean);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl1meanheight=`/**
+ * MeanHeight.java - Calculates the mean height of 11 players.
+ * @author Veera Raghavan
+ */
+import java.util.Scanner;
+
+public class MeanHeight {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        double[] heights = new double[11];
+        double sum = 0.0;
+
+        for (int i = 0; i < heights.length; i++) {
+            System.out.print("Enter height for player " + (i + 1) + ": ");
+            heights[i] = input.nextDouble();
+            sum += heights[i];
+        }
+
+        double mean = sum / heights.length;
+        System.out.printf("The mean height of the team is: %.2f\\n", mean);
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">MultiplicationTable.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl1multiplicationtable')" id="eye-w3lvl1multiplicationtable"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl1multiplicationtable')" id="copy-w3lvl1multiplicationtable"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Store the multiplication table (1–10) of a user-entered number in an array and display it.</p>
+          <div class="code-viewer" id="cv-w3lvl1multiplicationtable" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl1multiplicationtable"><pre><span class="cv-cm">/**
+ * MultiplicationTable.java - Generates and stores a multiplication table.
+ * @author Veera Raghavan
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">MultiplicationTable</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter a number: "</span>);
+        <span class="cv-kw">int</span> number = input.<span class="cv-fn">nextInt</span>();
+        <span class="cv-kw">int</span>[] table = <span class="cv-kw">new int</span>[<span class="cv-str">10</span>];
+
+        <span class="cv-cm">// Store results in array</span>
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < <span class="cv-str">10</span>; i++) {
+            table[i] = number * (i + <span class="cv-str">1</span>);
+        }
+
+        <span class="cv-cm">// Display results from array</span>
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Multiplication Table for "</span> + number + <span class="cv-str">":"</span>);
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < <span class="cv-str">10</span>; i++) {
+            System.out.<span class="cv-fn">println</span>(number + <span class="cv-str">" * "</span> + (i + <span class="cv-str">1</span>) + <span class="cv-str">" = "</span> + table[i]);
+        }
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl1multiplicationtable=`/**
+ * MultiplicationTable.java - Generates and stores a multiplication table.
+ * @author Veera Raghavan
+ */
+import java.util.Scanner;
+
+public class MultiplicationTable {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = input.nextInt();
+        int[] table = new int[10];
+
+        // Store results in array
+        for (int i = 0; i < 10; i++) {
+            table[i] = number * (i + 1);
+        }
+
+        // Display results from array
+        System.out.println("Multiplication Table for " + number + ":");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(number + " * " + (i + 1) + " = " + table[i]);
+        }
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">NumberAnalysis.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl1numberanalysis')" id="eye-w3lvl1numberanalysis"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl1numberanalysis')" id="copy-w3lvl1numberanalysis"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept 5 integers into an array, classify each by sign and parity, then compare the first and last elements.</p>
+          <div class="code-viewer" id="cv-w3lvl1numberanalysis" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl1numberanalysis"><pre><span class="cv-cm">/**
+ * NumberAnalysis.java - Analyzes 5 numbers for sign and parity.
+ * @author Veera Raghavan
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">NumberAnalysis</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        <span class="cv-kw">int</span>[] numbers = <span class="cv-kw">new int</span>[<span class="cv-str">5</span>];
+
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < numbers.length; i++) {
+            System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter number "</span> + (i + <span class="cv-str">1</span>) + <span class="cv-str">": "</span>);
+            numbers[i] = input.<span class="cv-fn">nextInt</span>();
+        }
+
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> num : numbers) {
+            <span class="cv-kw">if</span> (num > <span class="cv-str">0</span>) {
+                String parity = (num % <span class="cv-str">2</span> == <span class="cv-str">0</span>) ? <span class="cv-str">"even"</span> : <span class="cv-str">"odd"</span>;
+                System.out.<span class="cv-fn">println</span>(num + <span class="cv-str">" is positive and "</span> + parity + <span class="cv-str">"."</span>);
+            } <span class="cv-kw">else if</span> (num < <span class="cv-str">0</span>) {
+                System.out.<span class="cv-fn">println</span>(num + <span class="cv-str">" is negative."</span>);
+            } <span class="cv-kw">else</span> {
+                System.out.<span class="cv-fn">println</span>(num + <span class="cv-str">" is zero."</span>);
+            }
+        }
+
+        <span class="cv-cm">// Compare first and last elements</span>
+        <span class="cv-kw">if</span> (numbers[<span class="cv-str">0</span>] == numbers[<span class="cv-str">4</span>]) {
+            System.out.<span class="cv-fn">println</span>(<span class="cv-str">"First and last elements are equal."</span>);
+        } <span class="cv-kw">else if</span> (numbers[<span class="cv-str">0</span>] > numbers[<span class="cv-str">4</span>]) {
+            System.out.<span class="cv-fn">println</span>(<span class="cv-str">"First element is greater than the last."</span>);
+        } <span class="cv-kw">else</span> {
+            System.out.<span class="cv-fn">println</span>(<span class="cv-str">"First element is less than the last."</span>);
+        }
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl1numberanalysis=`/**
+ * NumberAnalysis.java - Analyzes 5 numbers for sign and parity.
+ * @author Veera Raghavan
+ */
+import java.util.Scanner;
+
+public class NumberAnalysis {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int[] numbers = new int[5];
+
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.print("Enter number " + (i + 1) + ": ");
+            numbers[i] = input.nextInt();
+        }
+
+        for (int num : numbers) {
+            if (num > 0) {
+                String parity = (num % 2 == 0) ? "even" : "odd";
+                System.out.println(num + " is positive and " + parity + ".");
+            } else if (num < 0) {
+                System.out.println(num + " is negative.");
+            } else {
+                System.out.println(num + " is zero.");
+            }
+        }
+
+        // Compare first and last elements
+        if (numbers[0] == numbers[4]) {
+            System.out.println("First and last elements are equal.");
+        } else if (numbers[0] > numbers[4]) {
+            System.out.println("First element is greater than the last.");
+        } else {
+            System.out.println("First element is less than the last.");
+        }
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">VotingEligibility.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl1votingeligibility')" id="eye-w3lvl1votingeligibility"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl1votingeligibility')" id="copy-w3lvl1votingeligibility"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Store ages of 10 students in an array and check each one's voting eligibility, flagging invalid ages.</p>
+          <div class="code-viewer" id="cv-w3lvl1votingeligibility" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl1votingeligibility"><pre><span class="cv-cm">/**
+ * VotingEligibility.java - Checks voting eligibility for a class of 10 students.
+ * @author Veera Raghavan
+ * @version 1.0
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">VotingEligibility</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        <span class="cv-kw">int</span>[] studentAges = <span class="cv-kw">new int</span>[<span class="cv-str">10</span>];
+
+        <span class="cv-cm">// Input loop for 10 students</span>
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < studentAges.length; i++) {
+            System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter age for student "</span> + (i + <span class="cv-str">1</span>) + <span class="cv-str">": "</span>);
+            studentAges[i] = input.<span class="cv-fn">nextInt</span>();
+        }
+
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"\n--- Eligibility Results ---"</span>);
+        <span class="cv-cm">// Validation and Eligibility loop</span>
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> age : studentAges) {
+            <span class="cv-kw">if</span> (age < <span class="cv-str">0</span>) {
+                System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Invalid age: "</span> + age);
+            } <span class="cv-kw">else if</span> (age >= <span class="cv-str">18</span>) {
+                System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The student with age "</span> + age + <span class="cv-str">" can vote."</span>);
+            } <span class="cv-kw">else</span> {
+                System.out.<span class="cv-fn">println</span>(<span class="cv-str">"The student with age "</span> + age + <span class="cv-str">" cannot vote."</span>);
+            }
+        }
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl1votingeligibility=`/**
+ * VotingEligibility.java - Checks voting eligibility for a class of 10 students.
+ * @author Veera Raghavan
+ * @version 1.0
+ */
+import java.util.Scanner;
+
+public class VotingEligibility {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int[] studentAges = new int[10];
+
+        // Input loop for 10 students
+        for (int i = 0; i < studentAges.length; i++) {
+            System.out.print("Enter age for student " + (i + 1) + ": ");
+            studentAges[i] = input.nextInt();
+        }
+
+        System.out.println("\\n--- Eligibility Results ---");
+        // Validation and Eligibility loop
+        for (int age : studentAges) {
+            if (age < 0) {
+                System.out.println("Invalid age: " + age);
+            } else if (age >= 18) {
+                System.out.println("The student with age " + age + " can vote.");
+            } else {
+                System.out.println("The student with age " + age + " cannot vote.");
+            }
+        }
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+    </div>
+    <div class="level-content " id="w3lvl2">
+      <div class="level-header">
+        <span class="level-badge lvl2">Level 2 — Solve Minimum 2–3 Problems</span>
+        <div class="level-line"></div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">ArrayStats.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl2arraystats')" id="eye-w3lvl2arraystats"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl2arraystats')" id="copy-w3lvl2arraystats"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept N integers into an array and find the largest and second largest values.</p>
+          <div class="code-viewer" id="cv-w3lvl2arraystats" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl2arraystats"><pre><span class="cv-cm">/**
+ * ArrayStats.java - Finds the top two largest values in an array.
+ * @author Veera Raghavan
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">ArrayStats</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter array size (min 2): "</span>);
+        <span class="cv-kw">int</span> size = input.<span class="cv-fn">nextInt</span>();
+
+        <span class="cv-kw">if</span> (size < <span class="cv-str">2</span>) {
+            System.err.<span class="cv-fn">println</span>(<span class="cv-str">"Size must be at least 2."</span>);
+            <span class="cv-kw">return</span>;
+        }
+
+        <span class="cv-kw">int</span>[] arr = <span class="cv-kw">new int</span>[size];
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < size; i++) {
+            System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Element "</span> + i + <span class="cv-str">": "</span>);
+            arr[i] = input.<span class="cv-fn">nextInt</span>();
+        }
+
+        <span class="cv-kw">int</span> largest = Integer.MIN_VALUE;
+        <span class="cv-kw">int</span> secondLargest = Integer.MIN_VALUE;
+
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> num : arr) {
+            <span class="cv-kw">if</span> (num > largest) {
+                secondLargest = largest;
+                largest = num;
+            } <span class="cv-kw">else if</span> (num > secondLargest && num != largest) {
+                secondLargest = num;
+            }
+        }
+
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Largest: "</span> + largest);
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Second Largest: "</span> + secondLargest);
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl2arraystats=`/**
+ * ArrayStats.java - Finds the top two largest values in an array.
+ * @author Veera Raghavan
+ */
+import java.util.Scanner;
+
+public class ArrayStats {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter array size (min 2): ");
+        int size = input.nextInt();
+
+        if (size < 2) {
+            System.err.println("Size must be at least 2.");
+            return;
+        }
+
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            System.out.print("Element " + i + ": ");
+            arr[i] = input.nextInt();
+        }
+
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
+        for (int num : arr) {
+            if (num > largest) {
+                secondLargest = largest;
+                largest = num;
+            } else if (num > secondLargest && num != largest) {
+                secondLargest = num;
+            }
+        }
+
+        System.out.println("Largest: " + largest);
+        System.out.println("Second Largest: " + secondLargest);
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">BMICalculator.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl2bmicalculator')" id="eye-w3lvl2bmicalculator"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl2bmicalculator')" id="copy-w3lvl2bmicalculator"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Use parallel arrays to store weight, height, BMI and status for N persons, then print a full BMI report.</p>
+          <div class="code-viewer" id="cv-w3lvl2bmicalculator" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl2bmicalculator"><pre><span class="cv-cm">/**
+ * BMICalculator.java - Calculates BMI and weight status for a group of people.
+ * @author Veera Raghavan
+ * @version 1.0
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">BMICalculator</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter the number of persons: "</span>);
+        <span class="cv-kw">int</span> numPersons = input.<span class="cv-fn">nextInt</span>();
+
+        <span class="cv-cm">// Parallel arrays to store data</span>
+        <span class="cv-kw">double</span>[] weights = <span class="cv-kw">new double</span>[numPersons];
+        <span class="cv-kw">double</span>[] heights = <span class="cv-kw">new double</span>[numPersons];
+        <span class="cv-kw">double</span>[] bmiValues = <span class="cv-kw">new double</span>[numPersons];
+        String[] weightStatus = <span class="cv-kw">new</span> String[numPersons];
+
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < numPersons; i++) {
+            System.out.<span class="cv-fn">println</span>(<span class="cv-str">"\nPerson "</span> + (i + <span class="cv-str">1</span>) + <span class="cv-str">":"</span>);
+            System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter weight (kg): "</span>);
+            weights[i] = input.<span class="cv-fn">nextDouble</span>();
+            System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter height (cm): "</span>);
+            heights[i] = input.<span class="cv-fn">nextDouble</span>();
+
+            <span class="cv-kw">if</span> (weights[i] <= <span class="cv-str">0</span> || heights[i] <= <span class="cv-str">0</span>) {
+                System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Invalid input. Please enter positive values."</span>);
+                i--; <span class="cv-kw">continue</span>;
+            }
+
+            <span class="cv-kw">double</span> heightInMeters = heights[i] / <span class="cv-str">100.0</span>;
+            bmiValues[i] = weights[i] / (heightInMeters * heightInMeters);
+
+            <span class="cv-kw">if</span> (bmiValues[i] < <span class="cv-str">18.5</span>) weightStatus[i] = <span class="cv-str">"Underweight"</span>;
+            <span class="cv-kw">else if</span> (bmiValues[i] < <span class="cv-str">24.9</span>) weightStatus[i] = <span class="cv-str">"Normal"</span>;
+            <span class="cv-kw">else if</span> (bmiValues[i] < <span class="cv-str">29.9</span>) weightStatus[i] = <span class="cv-str">"Overweight"</span>;
+            <span class="cv-kw">else</span> weightStatus[i] = <span class="cv-str">"Obese"</span>;
+        }
+
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"\n--- BMI Report ---"</span>);
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < numPersons; i++) {
+            System.out.<span class="cv-fn">printf</span>(<span class="cv-str">"Person %d: Height: %.1f cm, Weight: %.1f kg, BMI: %.2f, Status: %s\n"</span>,
+                (i + <span class="cv-str">1</span>), heights[i], weights[i], bmiValues[i], weightStatus[i]);
+        }
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl2bmicalculator=`/**
+ * BMICalculator.java - Calculates BMI and weight status for a group of people.
+ * @author Veera Raghavan
+ * @version 1.0
+ */
+import java.util.Scanner;
+
+public class BMICalculator {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter the number of persons: ");
+        int numPersons = input.nextInt();
+
+        // Parallel arrays to store data
+        double[] weights = new double[numPersons];
+        double[] heights = new double[numPersons];
+        double[] bmiValues = new double[numPersons];
+        String[] weightStatus = new String[numPersons];
+
+        // Data Input and Calculation
+        for (int i = 0; i < numPersons; i++) {
+            System.out.println("\\nPerson " + (i + 1) + ":");
+            System.out.print("Enter weight (kg): ");
+            weights[i] = input.nextDouble();
+            System.out.print("Enter height (cm): ");
+            heights[i] = input.nextDouble();
+
+            if (weights[i] <= 0 || heights[i] <= 0) {
+                System.out.println("Invalid input. Please enter positive values.");
+                i--;
+                continue;
+            }
+
+            double heightInMeters = heights[i] / 100.0;
+            bmiValues[i] = weights[i] / (heightInMeters * heightInMeters);
+
+            if (bmiValues[i] < 18.5) weightStatus[i] = "Underweight";
+            else if (bmiValues[i] < 24.9) weightStatus[i] = "Normal";
+            else if (bmiValues[i] < 29.9) weightStatus[i] = "Overweight";
+            else weightStatus[i] = "Obese";
+        }
+
+        System.out.println("\\n--- BMI Report ---");
+        for (int i = 0; i < numPersons; i++) {
+            System.out.printf("Person %d: Height: %.1f cm, Weight: %.1f kg, BMI: %.2f, Status: %s\\n",
+                (i + 1), heights[i], weights[i], bmiValues[i], weightStatus[i]);
+        }
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">DigitFrequency.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl2digitfrequency')" id="eye-w3lvl2digitfrequency"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl2digitfrequency')" id="copy-w3lvl2digitfrequency"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Count the frequency of each digit (0–9) in a user-entered number using a frequency array of size 10.</p>
+          <div class="code-viewer" id="cv-w3lvl2digitfrequency" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl2digitfrequency"><pre><span class="cv-cm">/**
+ * DigitFrequency.java - Counts the occurrence of each digit in a number.
+ * @author Veera Raghavan
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">DigitFrequency</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter a number: "</span>);
+        <span class="cv-kw">long</span> number = Math.<span class="cv-fn">abs</span>(input.<span class="cv-fn">nextLong</span>());
+
+        <span class="cv-kw">int</span>[] frequency = <span class="cv-kw">new int</span>[<span class="cv-str">10</span>]; <span class="cv-cm">// Indices 0-9 represent digits</span>
+
+        <span class="cv-kw">long</span> temp = number;
+        <span class="cv-kw">if</span> (temp == <span class="cv-str">0</span>) frequency[<span class="cv-str">0</span>] = <span class="cv-str">1</span>;
+
+        <span class="cv-kw">while</span> (temp > <span class="cv-str">0</span>) {
+            <span class="cv-kw">int</span> digit = (<span class="cv-kw">int</span>)(temp % <span class="cv-str">10</span>);
+            frequency[digit]++;
+            temp /= <span class="cv-str">10</span>;
+        }
+
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Digit frequencies for "</span> + number + <span class="cv-str">":"</span>);
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < frequency.length; i++) {
+            <span class="cv-kw">if</span> (frequency[i] > <span class="cv-str">0</span>) {
+                System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Digit "</span> + i + <span class="cv-str">" appears "</span> + frequency[i] + <span class="cv-str">" times."</span>);
+            }
+        }
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl2digitfrequency=`/**
+ * DigitFrequency.java - Counts the occurrence of each digit in a number.
+ * @author Veera Raghavan
+ */
+import java.util.Scanner;
+
+public class DigitFrequency {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        long number = Math.abs(input.nextLong());
+
+        int[] frequency = new int[10]; // Indices 0-9 represent digits
+
+        long temp = number;
+        if (temp == 0) frequency[0] = 1;
+
+        while (temp > 0) {
+            int digit = (int)(temp % 10);
+            frequency[digit]++;
+            temp /= 10;
+        }
+
+        System.out.println("Digit frequencies for " + number + ":");
+        for (int i = 0; i < frequency.length; i++) {
+            if (frequency[i] > 0) {
+                System.out.println("Digit " + i + " appears " + frequency[i] + " times.");
+            }
+        }
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">MatrixTranspose.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl2matrixtranspose')" id="eye-w3lvl2matrixtranspose"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl2matrixtranspose')" id="copy-w3lvl2matrixtranspose"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Accept a user-defined matrix and compute its transpose by swapping rows and columns using a 2D array.</p>
+          <div class="code-viewer" id="cv-w3lvl2matrixtranspose" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl2matrixtranspose"><pre><span class="cv-cm">/**
+ * MatrixTranspose.java - Computes the transpose of a user-defined matrix.
+ * @author Veera Raghavan
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">MatrixTranspose</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter rows and columns: "</span>);
+        <span class="cv-kw">int</span> rows = input.<span class="cv-fn">nextInt</span>();
+        <span class="cv-kw">int</span> cols = input.<span class="cv-fn">nextInt</span>();
+
+        <span class="cv-kw">int</span>[][] matrix = <span class="cv-kw">new int</span>[rows][cols];
+        <span class="cv-kw">int</span>[][] transpose = <span class="cv-kw">new int</span>[cols][rows];
+
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Enter matrix elements:"</span>);
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < rows; i++) {
+            <span class="cv-kw">for</span> (<span class="cv-kw">int</span> j = <span class="cv-str">0</span>; j < cols; j++) {
+                matrix[i][j] = input.<span class="cv-fn">nextInt</span>();
+            }
+        }
+
+        <span class="cv-cm">// Transpose: matrix[i][j] becomes transpose[j][i]</span>
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < rows; i++) {
+            <span class="cv-kw">for</span> (<span class="cv-kw">int</span> j = <span class="cv-str">0</span>; j < cols; j++) {
+                transpose[j][i] = matrix[i][j];
+            }
+        }
+
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"\nTransposed Matrix:"</span>);
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span>[] row : transpose) {
+            <span class="cv-kw">for</span> (<span class="cv-kw">int</span> val : row) {
+                System.out.<span class="cv-fn">print</span>(val + <span class="cv-str">" "</span>);
+            }
+            System.out.<span class="cv-fn">println</span>();
+        }
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl2matrixtranspose=`/**
+ * MatrixTranspose.java - Computes the transpose of a user-defined matrix.
+ * @author Veera Raghavan
+ */
+import java.util.Scanner;
+
+public class MatrixTranspose {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter rows and columns: ");
+        int rows = input.nextInt();
+        int cols = input.nextInt();
+
+        int[][] matrix = new int[rows][cols];
+        int[][] transpose = new int[cols][rows];
+
+        System.out.println("Enter matrix elements:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = input.nextInt();
+            }
+        }
+
+        // Transpose logic: matrix[i][j] becomes transpose[j][i]
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                transpose[j][i] = matrix[i][j];
+            }
+        }
+
+        System.out.println("\\nTransposed Matrix:");
+        for (int[] row : transpose) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">StudentGrades.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl2studentgrades')" id="eye-w3lvl2studentgrades"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl2studentgrades')" id="copy-w3lvl2studentgrades"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Use a 2D array to store Physics, Chemistry and Maths marks for N students, then calculate percentage and assign grades.</p>
+          <div class="code-viewer" id="cv-w3lvl2studentgrades" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl2studentgrades"><pre><span class="cv-cm">/**
+ * StudentGrades.java - Manages student marks using a 2D array.
+ * @author Veera Raghavan
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">StudentGrades</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter number of students: "</span>);
+        <span class="cv-kw">int</span> n = input.<span class="cv-fn">nextInt</span>();
+
+        <span class="cv-cm">// 2D Array: rows = students, columns = 3 (Phys, Chem, Maths)</span>
+        <span class="cv-kw">int</span>[][] marks = <span class="cv-kw">new int</span>[n][<span class="cv-str">3</span>];
+        <span class="cv-kw">double</span>[] percentages = <span class="cv-kw">new double</span>[n];
+        <span class="cv-kw">char</span>[] grades = <span class="cv-kw">new char</span>[n];
+
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < n; i++) {
+            System.out.<span class="cv-fn">println</span>(<span class="cv-str">"\nEnter marks for Student "</span> + (i + <span class="cv-str">1</span>) + <span class="cv-str">":"</span>);
+            <span class="cv-kw">for</span> (<span class="cv-kw">int</span> j = <span class="cv-str">0</span>; j < <span class="cv-str">3</span>; j++) {
+                String subject = (j == <span class="cv-str">0</span>) ? <span class="cv-str">"Physics"</span> : (j == <span class="cv-str">1</span>) ? <span class="cv-str">"Chemistry"</span> : <span class="cv-str">"Maths"</span>;
+                System.out.<span class="cv-fn">print</span>(subject + <span class="cv-str">": "</span>);
+                marks[i][j] = input.<span class="cv-fn">nextInt</span>();
+                <span class="cv-kw">if</span> (marks[i][j] < <span class="cv-str">0</span> || marks[i][j] > <span class="cv-str">100</span>) {
+                    System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Invalid marks. Re-enter."</span>);
+                    j--;
+                }
+            }
+            <span class="cv-kw">double</span> total = marks[i][<span class="cv-str">0</span>] + marks[i][<span class="cv-str">1</span>] + marks[i][<span class="cv-str">2</span>];
+            percentages[i] = total / <span class="cv-str">3.0</span>;
+            <span class="cv-kw">if</span> (percentages[i] >= <span class="cv-str">80</span>) grades[i] = <span class="cv-str">'A'</span>;
+            <span class="cv-kw">else if</span> (percentages[i] >= <span class="cv-str">70</span>) grades[i] = <span class="cv-str">'B'</span>;
+            <span class="cv-kw">else if</span> (percentages[i] >= <span class="cv-str">60</span>) grades[i] = <span class="cv-str">'C'</span>;
+            <span class="cv-kw">else if</span> (percentages[i] >= <span class="cv-str">50</span>) grades[i] = <span class="cv-str">'D'</span>;
+            <span class="cv-kw">else</span> grades[i] = <span class="cv-str">'F'</span>;
+        }
+
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"\n--- Performance Summary ---"</span>);
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < n; i++) {
+            System.out.<span class="cv-fn">printf</span>(<span class="cv-str">"Student %d | Perc: %.2f%% | Grade: %c\n"</span>, (i+<span class="cv-str">1</span>), percentages[i], grades[i]);
+        }
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl2studentgrades=`/**
+ * StudentGrades.java - Manages student marks using a 2D array.
+ * @author Veera Raghavan
+ */
+import java.util.Scanner;
+
+public class StudentGrades {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter number of students: ");
+        int n = input.nextInt();
+
+        // 2D Array: rows = students, columns = 3 (Phys, Chem, Maths)
+        int[][] marks = new int[n][3];
+        double[] percentages = new double[n];
+        char[] grades = new char[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\\nEnter marks for Student " + (i + 1) + ":");
+            for (int j = 0; j < 3; j++) {
+                String subject = (j == 0) ? "Physics" : (j == 1) ? "Chemistry" : "Maths";
+                System.out.print(subject + ": ");
+                marks[i][j] = input.nextInt();
+                if (marks[i][j] < 0 || marks[i][j] > 100) {
+                    System.out.println("Invalid marks. Re-enter.");
+                    j--;
+                }
+            }
+            double total = marks[i][0] + marks[i][1] + marks[i][2];
+            percentages[i] = total / 3.0;
+            if (percentages[i] >= 80) grades[i] = 'A';
+            else if (percentages[i] >= 70) grades[i] = 'B';
+            else if (percentages[i] >= 60) grades[i] = 'C';
+            else if (percentages[i] >= 50) grades[i] = 'D';
+            else grades[i] = 'F';
+        }
+
+        System.out.println("\\n--- Performance Summary ---");
+        for (int i = 0; i < n; i++) {
+            System.out.printf("Student %d | Perc: %.2f%% | Grade: %c\\n", (i+1), percentages[i], grades[i]);
+        }
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+    </div>
+    <div class="level-content " id="w3lvl3">
+      <div class="level-header">
+        <span class="level-badge lvl3">Level 3 — Solve Minimum 1–2 Problems</span>
+        <div class="level-line"></div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-header">
+          <div class="problem-icon lvl3">☕</div>
+          <div class="problem-filename">DigitFrequency.java</div>
+          <div class="code-viewer-actions">
+            <button class="cv-btn" onclick="toggleCode('w3lvl3digitfrequency')" id="eye-w3lvl3digitfrequency"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> View Code</button>
+            <button class="cv-btn" onclick="copyCode('w3lvl3digitfrequency')" id="copy-w3lvl3digitfrequency"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button>
+          </div>
+        </div>
+        <div class="problem-body">
+          <p class="problem-desc">Count digit occurrences using two arrays: one to extract digits, one as a frequency map of size 10.</p>
+          <div class="code-viewer" id="cv-w3lvl3digitfrequency" style="margin-top:0">
+            <div class="code-viewer-body" id="body-w3lvl3digitfrequency"><pre><span class="cv-cm">/**
+ * DigitFrequency.java - A program to find the frequency of each digit in a number.
+ * This fulfills the Level 3 Practice Requirement.
+ *
+ * @author Veera Raghavan
+ * @version 1.0
+ */</span>
+<span class="cv-kw">import</span> java.util.Scanner;
+
+<span class="cv-kw">public class</span> <span class="cv-cls">DigitFrequency</span> {
+    <span class="cv-kw">public static void</span> <span class="cv-fn">main</span>(String[] args) {
+        Scanner input = <span class="cv-kw">new</span> <span class="cv-cls">Scanner</span>(System.in);
+
+        System.out.<span class="cv-fn">print</span>(<span class="cv-str">"Enter a number: "</span>);
+        <span class="cv-kw">long</span> number = input.<span class="cv-fn">nextLong</span>();
+
+        <span class="cv-cm">// Use absolute value to handle negative inputs correctly</span>
+        <span class="cv-kw">long</span> tempNumber = Math.<span class="cv-fn">abs</span>(number);
+
+        <span class="cv-cm">// 1. Find the count of digits in the number</span>
+        <span class="cv-kw">int</span> count = <span class="cv-str">0</span>;
+        <span class="cv-kw">long</span> temp = tempNumber;
+        <span class="cv-kw">if</span> (temp == <span class="cv-str">0</span>) count = <span class="cv-str">1</span>;
+        <span class="cv-kw">while</span> (temp > <span class="cv-str">0</span>) { count++; temp /= <span class="cv-str">10</span>; }
+
+        <span class="cv-cm">// 2. Find the digits and save them in an array</span>
+        <span class="cv-kw">int</span>[] digits = <span class="cv-kw">new int</span>[count];
+        temp = tempNumber;
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < count; i++) {
+            digits[i] = (<span class="cv-kw">int</span>)(temp % <span class="cv-str">10</span>);
+            temp /= <span class="cv-str">10</span>;
+        }
+
+        <span class="cv-cm">// 3. Find the frequency of each digit using a frequency array of size 10</span>
+        <span class="cv-kw">int</span>[] frequency = <span class="cv-kw">new int</span>[<span class="cv-str">10</span>];
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < digits.length; i++) {
+            <span class="cv-kw">int</span> digitValue = digits[i];
+            frequency[digitValue]++;
+        }
+
+        <span class="cv-cm">// 4. Display the frequency of each digit</span>
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"\nDigit Frequency Report for: "</span> + number);
+        System.out.<span class="cv-fn">println</span>(<span class="cv-str">"------------------------------------"</span>);
+        <span class="cv-kw">for</span> (<span class="cv-kw">int</span> i = <span class="cv-str">0</span>; i < frequency.length; i++) {
+            <span class="cv-kw">if</span> (frequency[i] > <span class="cv-str">0</span>) {
+                System.out.<span class="cv-fn">println</span>(<span class="cv-str">"Digit "</span> + i + <span class="cv-str">" occurs "</span> + frequency[i] + <span class="cv-str">" times."</span>);
+            }
+        }
+
+        input.<span class="cv-fn">close</span>();
+    }
+}</pre></div>
+          </div>
+          <script>(function(){window._code_w3lvl3digitfrequency=`/**
+ * DigitFrequency.java - A program to find the frequency of each digit in a number.
+ * This fulfills the Level 3 Practice Requirement.
+ *
+ * @author Veera Raghavan
+ * @version 1.0
+ */
+import java.util.Scanner;
+
+public class DigitFrequency {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        long number = input.nextLong();
+
+        // Use absolute value to handle negative inputs correctly
+        long tempNumber = Math.abs(number);
+
+        // 1. Find the count of digits in the number
+        int count = 0;
+        long temp = tempNumber;
+        if (temp == 0) count = 1;
+        while (temp > 0) {
+            count++;
+            temp /= 10;
+        }
+
+        // 2. Find the digits and save them in an array
+        int[] digits = new int[count];
+        temp = tempNumber;
+        for (int i = 0; i < count; i++) {
+            digits[i] = (int)(temp % 10);
+            temp /= 10;
+        }
+
+        // 3. Find the frequency of each digit using a frequency array of size 10
+        int[] frequency = new int[10];
+        for (int i = 0; i < digits.length; i++) {
+            int digitValue = digits[i];
+            frequency[digitValue]++;
+        }
+
+        // 4. Display the frequency of each digit
+        System.out.println("\\nDigit Frequency Report for: " + number);
+        System.out.println("------------------------------------");
+        for (int i = 0; i < frequency.length; i++) {
+            if (frequency[i] > 0) {
+                System.out.println("Digit " + i + " occurs " + frequency[i] + " times.");
+            }
+        }
+
+        input.close();
+    }
+}`;})();</script>
+        </div>
+      </div>
+    </div>
+    <div class="submit-step">
+      <div class="submit-step-title"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Push &amp; Submit to Google Classroom</div>
+      <div class="steps-list">
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">1</div><div class="step-title">Add your .java files into the Level folders</div></div>
+          <div class="step-body"><p class="step-desc">Copy your solved Java files into <code>Level-1/</code>, <code>Level-2/</code>, <code>Level-3/</code> in your local <code>practice-problems</code> folder.</p></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">2</div><div class="step-title">Stage, commit &amp; push to GitHub</div></div>
+          <div class="step-body">
+            <div class="code-block"><span class="line"><span class="cmd">cd</span> practice-problems</span>
+<span class="line"><span class="cmd">git add</span> .</span>
+<span class="line"><span class="cmd">git commit</span> <span class="flag">-m</span> <span class="str">"Glt: Lvl-1, Lvl-2, Lvl-3 commit"</span></span>
+<span class="line"><span class="cmd">git push</span> origin main</span></div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header"><div class="step-num">3</div><div class="step-title">Copy repo link &amp; Turn in on Google Classroom</div></div>
+          <div class="step-body">
+            <div class="gh-steps">
+              <span class="gh-step">Open <code>practice-problems</code> on GitHub</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Copy the repo URL</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Go to Google Classroom</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Open the assignment</span><span class="gh-arrow">→</span>
+              <span class="gh-step">Paste link &amp; Turn In</span>
+            </div>
+            <div class="complete-banner"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Assignment submitted!</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -4064,7 +5141,7 @@ public class PrimeChecker {
 
   // ── Week / Level tabs ─────────────────────────────────
   function switchWeek(id) {
-    document.querySelectorAll('.week-tab').forEach((t, i) => t.classList.toggle('active', ['week1','week2'][i] === id));
+    document.querySelectorAll('.week-tab').forEach((t, i) => t.classList.toggle('active', ['week1','week2','week3'][i] === id));
     document.querySelectorAll('.week-content').forEach(c => c.classList.toggle('active', c.id === id));
   }
 
